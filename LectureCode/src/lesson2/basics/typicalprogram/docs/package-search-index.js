@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"lesson2.basics.typicalprogram"}]

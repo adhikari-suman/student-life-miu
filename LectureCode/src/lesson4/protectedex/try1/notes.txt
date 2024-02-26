@@ -1,0 +1,22 @@
+This is the general case of the problem
+All 3 classes are in different packages.
+
+                 SuperClass
+                     ^
+                     |
+            -------------------
+            |                  |
+            
+        CallingClass        ObjRefClass
+        
+Method in CallingClass tries to use an instance of 
+ObjRefClass to access a protected method in SuperClass.
+Compiler Error.
+
+Three ways to fix:
+
+1) Make ObjRefClass a subclass of Calling Class
+2) Put CallingClass in same package as SuperClass (doesn't
+even need to be a subclass of Superclass in that case)
+3) Override the protected method in ObjRefClass
+

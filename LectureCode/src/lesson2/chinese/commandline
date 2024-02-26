@@ -1,0 +1,17 @@
+1. Chinese to unicode: Use native2ascii java utility to convert it from UTF-8 
+into UTF-16 code units.
+
+   native2ascii -encoding utf8 c:\source.txt c:\output.txt
+   
+2. Unicode to chinese: If Windows and Eclipse are set up properly,
+System.out.println will transform code units to chinese characters.
+Otherwise, you can use an online utility.
+Convert unicode (UTF-16) to Chinese using 
+program at http://www.chinese-tools.com/tools/converter-unichar.html
+Pre-process to work with their format -- put UTF-16 characters
+into main method of Example, and use output in online program.
+
+NOTE: Put Eclipse in UTF-8 encoding by Preferences > General > Workspace,
+and change Text file encoding value to UTF-8. For chinese characters to show
+up properly on any Windows application, the East-asian languages must
+be installed.

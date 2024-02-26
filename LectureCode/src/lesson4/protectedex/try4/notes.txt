@@ -1,0 +1,7 @@
+Problem solved in this case by overriding
+in the ObjRefClass
+the protected method in superclass. 
+Then CallingClass doesn't need to be a subclass.
+
+This is the solution for handling the clone() method
+in Object (which plays the role of SuperClass here)

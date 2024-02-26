@@ -1,0 +1,5 @@
+Problem solved in this case by putting
+CallingClass in same package as SuperClass.
+Then just need ObjRefClass to be a subclass of SuperClass.
+See the diagram.
+               
