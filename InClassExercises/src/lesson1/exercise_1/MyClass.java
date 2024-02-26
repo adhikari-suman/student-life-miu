@@ -1,5 +1,7 @@
 package lesson1.exercise_1;
 
+import java.util.Arrays;
+
 /*
  * Use SampleClass to guide you as you try to write a program that
  * prints the following lines to the console:
@@ -25,7 +27,26 @@ package lesson1.exercise_1;
 public class MyClass {
 
 	public static void main(String[] args) {
+		/* Task 1 - Calculate the product and print */
+		// create an array of integers
+		int[] numbers = new int[]{2, 5, -3, 11, 1};
 		
+		// calculate the product
+		int product = product(numbers);
+		
+		// now print the result
+		System.out.println("The product of the values in {2, 5, -3, 11, 1} is " + product);
+		/* Task 1 Complete */
+		
+		/* Task 2 - Print the array */
+		System.out.println("A printout of the array of integers is "+Arrays.toString(numbers));
+		/* Task 2 Complete */
+		
+		/* Task 3 - Combine tasks */
+		String[] strings = new String[]{"ALMOST"," ","DONE"};
+		String combined = concatenate(strings);
+		System.out.println("Concatenating the strings in arr2 gives us: "+ combined);
+		/* Task 3 Complete */
 
 	}
 	
