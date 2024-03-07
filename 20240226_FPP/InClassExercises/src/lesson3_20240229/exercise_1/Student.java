@@ -27,7 +27,7 @@ public class Student {
 	}
 
 	public void addCourse(String course) {
-		if (course == null) {
+		if (course  == null) {
 			return;
 		}
 
