@@ -9,10 +9,10 @@ public class MyClass {
 		return val;
 	}
 	//implement
-//	@Override
-//	public int hashCode() {
-//		
-//	}
+	@Override
+	public int hashCode() {
+		return 2;
+	}
 	@Override
 	public String toString() {
 		return "MyClass object #" + val;
