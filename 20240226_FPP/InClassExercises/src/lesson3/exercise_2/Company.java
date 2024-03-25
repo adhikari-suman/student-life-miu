@@ -13,7 +13,7 @@ public class Company {
 		return address;
 	}
 	public Employee getPresident() {
-		return president;
+		return new Employee(president.getName(), president.getSalary());
 	}
 	public int getNumEmployees() {
 		return numEmployees;

@@ -3,28 +3,38 @@ package lesson8.exercise_2;
 public class Main {
 
 	public static void main(String[] args) {
-		//Single-node list
-		Node startNode = new Node();
-		startNode.data = "A";
-		System.out.println(startNode);
+		// Add A
+		Node head = new Node();
+		head.data = "A";
+		System.out.println(head);
+
+		// Add B
+		Node b = new Node();
+		b.data = "B";
+		head.next = b;
+		System.out.println(head);
+
+		// Add C
+		Node c = new Node();
+		c.data = "C";
+		b.next = c;
+		System.out.println(head);
+
+		// Remove B
+		head.next = c;
+		b.next = null;
+		b = null;
+		System.out.println(head);
+
+		// Add X between A & C
+		Node x = new Node();
+		x.data = "X";
+		head.next = x;
 		
-		//Two-node list
-		Node next = new Node();
-		next.data = "B";
-		startNode.next = next;
-		System.out.println(startNode);
+		x.next = c;
 		
-		//Three-node list -- add a node C to the list; (expected: A B C)
-		     //implement
-		System.out.println(startNode);
-		
-		//Remove B from the list (expected output: A C)
-		     //implement
-		System.out.println(startNode);
-		
-		//Insert X into position 1  (expected output: A X C)
-		     //implement
-		System.out.println(startNode);
+		c.next = null;
+		System.out.println(head);
 
 	}
 

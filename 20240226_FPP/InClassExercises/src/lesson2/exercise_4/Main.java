@@ -7,18 +7,20 @@ public class Main {
 	public static void main(String[] args) {
 		//use a Scanner to ask for user's name
 		//output the number of occurrences of 'e' in the name
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Your name?");
-		String name = sc.nextLine();
-		sc.close();
-		int count = 0;
-		for(int i = 0; i < name.length(); ++i) {
-			if(name.charAt(i) == 'e' || name.charAt(i) == 'E') {
-				++count;
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter your name: ");
+		String name = scan.nextLine();
+		
+		int numberOfEs = 0;
+		
+		for(int i=0;i<name.length();i++) {
+			if(name.charAt(i) == 'e') {
+				numberOfEs++;
 			}
 		}
-		System.out.println("Number of occurrences of 'e/E': " + count);
-
+		
+		scan.close();
+		System.out.printf("Number of e's in %s: %d",  name, numberOfEs);
 	}
 
 }

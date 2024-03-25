@@ -13,6 +13,7 @@ public class Employee {
 	public int getSalary() {
 		return salary;
 	}
+
 	public void setSalary(int s) {
 		salary = s;
 	}

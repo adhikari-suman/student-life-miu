@@ -199,6 +199,12 @@ public class MyHashtable implements Iterable {
 	public static void main(String[] args){
 		MyHashtable h= new MyHashtable(12);
 		//implement
+		for(int i=0;i<10;i++) {
+			MyClass c = new MyClass(i);
+			
+			h.put(i, c);
+			
+		}
 	}
 	
 	public void printTable() {
