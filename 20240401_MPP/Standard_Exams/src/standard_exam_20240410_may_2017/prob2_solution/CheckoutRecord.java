@@ -1,4 +1,4 @@
-package standard_exam_20240410.prob2_solution;
+package standard_exam_20240410_may_2017.prob2_solution;
 
 import java.util.ArrayList;
 import java.util.List;
