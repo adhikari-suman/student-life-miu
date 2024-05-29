@@ -1,0 +1,176 @@
+1. How would you define Machine Learning?
+
+Machine Learning is the field of study where computers have the ability to learn without explicitly being programmed. In simple terms, machine learns to do something and improves over time. Machine learning means computers can learn to do something with little to no intervention. This helps us save time and labour.
+
+2. Can you name four type of problems where it shines?
+
+ML shines in four kinds of problems:
+
+a. Supervised learning - Predicting/Classifying some data
+b. Unsupervised learning - Finding patterns in some data
+c. Semi-supervised learning - Learning to predict/clasify though lack of labelled data
+d. Reinforcement learning - Learning by actions and outcome
+
+3. What is a labelled training set?
+
+It refers to the portion of the overall data that is available for the model to learn from. This refers to the data the model will use to iterate over for learning over time.
+
+4. What are the two most common supervised tasks?
+
+a. Regression - Prediciton; Do I buy or not? 
+b. Classification - Well, basically classify. Do you fit in this box or that box? Or amongst many boxes, which box you fit in the most?
+
+5. Can you name four common unsupervised tasks?
+
+a. Clustering
+b. Anomaly Detection
+c. Dimensionality Reduction
+d. Association Rule Learning
+
+6. What type of Machine Learning algorithm would you use to allow a robot to walk in various unknown terrains?
+
+Reinforcement Learning
+
+7. What type of algorithm would you use to segment your customers into multiple groups?
+
+Depends on the situation:
+
+a. Clustering(K-Means, DBScan or HCA) - Since we do not know the what the groups could actually be.
+b. Classification - If we already know what the groups are, its just a matter of fitting a new customer in a group.
+
+8. Would you frame the problem of spam detection as a supervised learning problem or an unsupervised learning problem.
+
+Spam detection is both the problem in terms of real-life. Here's the analogy. You do not know what emails are spam and what are not. So, first you need to do unsupervised learning to categorize/label the data we already have. Then, now that we have the prediction/label, we can do classification algorithm on the dataset using the previously found data labels.
+
+After that, anytime a new email comes, we just test using classification, and as users keep on labelling the emails as spam or not, we can train the classification model using newly labelled data.
+
+So, at first, it's an unsupervised learning problem, after which it is a supervised classification learning problem. No real world problem is exaclty going to be either or or, it's going to be a mix of both depending on the readiness of the dataset. 
+
+A computer given enough time and resource can and will solve any problem.  
+
+9. What is an online learning system? 
+
+Online learning means the model learns in real=time incrementally over a batch of small dataset without the need for re-deployment.
+
+10. What is out-of-core learning?
+
+Out-of-core learning refers to training the model offline in batches due to the resources and time needed to train the model. Resources could be memory, disk space or processing power.
+
+11. What type of learning algorithm relies on a similarity measure to make predictions?
+
+ Instance-based learning algorithm like K-Nearest neighbour
+
+12. What is the difference between a model parameter and a learning algorithm’s hyperparameter?
+
+Model parameter refers to the features from the training dataset used by the model to train. Whereas, hyperparameter refers to the learning algorithm's parameter unrelated to the dataset like learning rate, batch size, etc. Hyperparameter determine how the learning algorithm work.
+
+13. What do model-based learning algorithms search for? What is the most common strategy they use to succeed? How do they make predictions? 
+
+Model-based learning alrgorithms search for the mathematical model that can represent the relationship between the input feature sets and the output labels correctly. 
+
+The most common strategy they use to succeed is to reduce/minimize the error/cost between the prediction labels and the actual labels. 
+
+Once the model learns from the existing dataset, and a mathematical model is established, with minimized cost function, the mathematical model is used on the input feature set to predict the output labels. 
+
+
+14. Can you name four of the main challenges in Machine Learning? 
+
+The four main challenges in Machine Learning are:
+
+a. Insufficient Training Data
+b. Nonrepresentative training data
+c. Poor quality data
+d. Irrelevant features
+
+15. If your model performs great on the training data but generalizes poorly to new instances, what is happening? Can you name three possible solutions?
+
+If the model performs great on the training data but generalizes poorly to new instances, the model is then overfitting the dataset. We can do below steps:
+
+a. Increase the amount of dataset we use for training
+b. Add validation test as well as test set
+c. Simplifying the mathematical model
+
+16. What is a test set and why would you want to use it? 
+
+Test set is a part of the data set that is not used for learning and is used to validate/test the mathematical model's accuracy to existing datasets.
+
+We use it to see the model accuracy on existing labelled dataset that it has not been trained on. 
+
+17. What is the purpose of a validation set? 
+
+Validation set's purpose is to double check the accuracy of different models. Many model may generalize using the test set and validation set is used to re-affirm the accuracy the second time.
+
+18. What can go wrong if you tune hyperparameters using the test set?  
+
+The model can either fit, underfit or overfit. Either of which cannot be predicted or learned from, which sways away from the objective of the machine learning i.e. learning from data.
+
+19. What is repeated cross-validation and why would you prefer it to using a single validation set? 
+
+Repeated cross-validation referes to splitting the data set into multiple random validation set and running the validation multiple times using each validation set to better predict the accuracy of generalization of the model. 
+
+It gives better accuracy and confidence of the model as opposed to a single validation test.
+
+Interview Questions Answers:
+
+Answer of Q1:
+
+15% of the overall 100,000 patient data would mean 15,000 dataset. 
+
+For this case we could just delete/omit the data since the dataset is quite large.
+
+If the missing values were considered a critical feature, I would still choose to either delete the data because the dataset is large and patient data should not be predicted at most times.
+
+Still if we would need to fill in the missing values, one can argue to use prediction models like regression on the exsiting data points or mean/median/mode imputation to fill in the missing values.
+
+Answer of Q2: 
+
+I would use Z-Score or IQR to find the outliers.
+
+I would use Imputation to replace outliers because the trades were real even though the market news affected it. Tey are inaccuracies but removing them means ignoring the realworld data which is not preferrable.
+
+The model opted to imputate the outliers which made sure the dataset are considered significant but the performance could be biased now because values are imputed rather than removed. So, we need to take in consideration of the cons here as well.
+
+
+Answer of Q4:
+
+Predicting housing prices from input features means it is a Regression problem.
+
+We should use standardization to rescale the feature set instead of normalization becase:
+
+a. Data is normally distributed rather than being on a same scale.
+
+
+Standardization would center the feature set and thus preserve the dataset by subtracting the mean and dividing by standard deviation thus increasing the performance of data. Whereas, Normalization brings everything to the scale of 0 to 1, which might increase the chance of outliers being normalized and go undetected.
+
+Lecture 2 Regression Summary
+
+Regression is a type of Supervised learning where we identify the releationship between the independent variables and the dependent variables. The model then can predict future unseen dependent variable using the independent variables given to the model.
+
+Eg: Prediciting sales price, housing prices, cancer threats, etc.
+
+Types:
+
+a. Linear Regression
+b. Polynomial Regression
+
+Regression Problem at a glance:
+
+Model: y = mx + c
+
+Cost function: J(m,c) = (1/N) * Sum(y(given) - y(predicted))^2 
+
+Goal: Find m,c where Min(J).
+
+m = m - Learning rate * dJ/dm
+c = c - Learning rate * dJ/dc
+
+Usage:
+
+a. For prediction
+b. For insight
+c. For validating the data given
+
+
+
+
+

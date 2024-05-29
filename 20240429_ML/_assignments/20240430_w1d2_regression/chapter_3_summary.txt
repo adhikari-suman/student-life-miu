@@ -1,0 +1,40 @@
+Chapter 3 Summary
+
+Classification is a type of Supervised learning. The goal of classification is to predict the category or class based on
+the feature set.
+
+Importance:
+1. Foundation of decision-making
+2. Versatile
+3. Enhanced Accuracy and Efficiency
+
+Applications:
+
+1. Email filtering
+2. Credit score eligibility
+3. Medical reports prediction
+4. Image recognition
+
+Types:
+
+1. Binary classification - Two classes one is alternate of other
+2. Multiclass classification - Three or more classes
+
+Classification Process:
+
+1. Define the problem
+2. Data Collection
+3. Data preprocessing
+4. Splitting the dataset
+5. Choosing a model
+6. Training the model
+7. Model Evaluation
+8. Model tuning and optimization
+9. Deployment
+10. Feedback Loop
+
+
+
+
+
+
