@@ -68,6 +68,18 @@ public class AccountResponse {
 		this.customer = customer;
 	}
 
+	public void setEntryList(Collection<AccountEntryResponse> entryList) {
+		this.entryList = entryList;
+	}
+
+	public CustomerResponse getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerResponse customer) {
+		this.customer = customer;
+	}
+
 	public Collection<AccountEntryResponse> getEntryList() {
 		return entryList;
 	}

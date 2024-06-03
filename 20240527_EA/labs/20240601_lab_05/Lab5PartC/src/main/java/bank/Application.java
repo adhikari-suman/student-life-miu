@@ -1,5 +1,8 @@
 package bank;
 
+import bank.contract.AccountEntryResponse;
+import bank.contract.AccountResponse;
+import bank.contract.CustomerResponse;
 import bank.domain.Account;
 import bank.domain.AccountEntry;
 import bank.domain.Customer;
@@ -32,8 +35,6 @@ public class Application implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-
-
         // create 2 accounts;
         accountService.createAccount(1263862, "Frank Brown");
         accountService.createAccount(4253892, "John Doe");
@@ -52,16 +53,16 @@ public class Application implements CommandLineRunner {
 
 
         // show balances
-        Collection<Account> accountlist = accountService.getAllAccounts();
-        Customer customer = null;
-        for (Account account : accountlist) {
-            customer = account.getCustomer();
+        Collection<AccountResponse> accountlist = accountService.getAllAccounts();
+        CustomerResponse customer = null;
+        for (AccountResponse account : accountlist) {
+            customer = account.getCustomerResponse();
             System.out.println("Statement for Account: " + account.getAccountNumber());
             System.out.println("Account Holder: " + customer.getName());
             System.out.println("-Date-------------------------"
                     + "-Description------------------"
                     + "-Amount-------------");
-            for (AccountEntry entry : account.getEntryList()) {
+            for (AccountEntryResponse entry : account.getEntryList()) {
                 System.out.printf("%30s%30s%20.2f\n", entry.getDate()
                         .toString(), entry.getDescription(), entry.getAmount());
             }

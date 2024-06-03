@@ -1,16 +1,17 @@
 package bank.service;
 
+import bank.contract.AccountResponse;
 import bank.domain.Account;
 
 import java.util.Collection;
 
 public interface AccountService {
 
-    public Account createAccount(long accountNumber, String customerName);
+    public AccountResponse createAccount(long accountNumber, String customerName);
 
-    public Account getAccount(long accountNumber);
+    public AccountResponse getAccount(long accountNumber);
 
-    public Collection<Account> getAllAccounts();
+    public Collection<AccountResponse> getAllAccounts();
 
     public void deposit (long accountNumber, double amount);
 
