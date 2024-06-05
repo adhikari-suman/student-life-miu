@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:123456@localhost:27017/testdb?authSource=admin
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework: ERROR
+
+
