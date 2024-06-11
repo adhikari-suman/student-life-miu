@@ -16,7 +16,7 @@ application:
   user:
     firstName: Ariel
     lastName: Adhikari
-    username: ariel
+    username: arielforever
     password: It'sASecret!!
 
   countries:
