@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: UniAttendanceSystem
+    seed: true    # seed must be true at least once, after that you can set it to false
+  profiles:
+    active: dev   # seeder work only in dev mode
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop   # set it to create-drop, update or none after once
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: true
+    defer-datasource-initialization: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/cs544_attendance?createDatabaseIfNotExist=true
+    hikari:
+      maximum-pool-size: 10
+
+  sql:
+    init:
+      mode: never
+
+  data:
+    jdbc:
+      dialect: mysql
