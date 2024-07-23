@@ -1,0 +1,1 @@
+INSERT INTO product(id, name, color, price) VALUES(1, 'iphone', 'red', 1199);
