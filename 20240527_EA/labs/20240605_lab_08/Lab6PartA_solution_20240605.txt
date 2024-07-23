@@ -1,0 +1,12 @@
+Write in a document why it is that we don’t need eager loading anymore and the Application still
+works with lazy loading. 
+
+
+Answer:
+
+Lazy loading loads the data in the memory when the attribute is accessed. We earlier got the error 
+because we tried to access it after the entityManager session closed.
+
+Now, we have made the whole class @Transactional. This means that the whole class is now transactional 
+and each public method run in a transaction. So, the session is open when we are trying to access the 
+lazy properties. Hence, we do not get the error.

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: Lab12PartC
+
+
+
+application:
+  name: Lab12PartC
+  version: 1.0
+
+  server:
+    port: 8080
+    name: Lab12PartC
+    url: localhost
+
+  user:
+    firstName: Ariel
+    lastName: Adhikari
+    username: arielforever
+    password: It'sASecret!!
+
+  countries:
+    - Nepal
+    - USA
+

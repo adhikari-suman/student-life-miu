@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: Lab6PartA
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/cs544-examples
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+  data:
+    jdbc:
+      dialect: mysql

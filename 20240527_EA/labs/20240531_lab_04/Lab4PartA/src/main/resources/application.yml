@@ -1,0 +1,16 @@
+spring:
+  boot:
+    name: "Lab5"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/cs544-examples
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+

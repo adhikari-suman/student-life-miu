@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-data-demo
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring-data-demo
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
