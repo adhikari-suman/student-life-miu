@@ -1,0 +1,4 @@
+docker run --name mongo-community -p 27017:27017 \
+-v ~/workspace/docker/mongodb/data/db:/data/db \
+-v ~/workspace/docker/mongodb/shared_data:/shared_data \
+-d mongo:latest
