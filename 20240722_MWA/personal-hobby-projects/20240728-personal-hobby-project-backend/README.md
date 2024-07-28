@@ -41,7 +41,17 @@ PORT=3000
 MONGODB_CONNECTION_URL = mongodb://localhost:27017/japaneseAnimes
 ```
 
-## 2. Feedbacks
+## 2. Importing Data to MongoDB
+
+We have a file inside `data/backup/animes.json`
+
+```bash
+mongoimport -d japaneseAnimes -c animes --file=data/animes.json --jsonArray --drop
+```
+
+>**NOTE:** Be careful when copy-pasting above commands. We are dropping all data before importing the collection. Make sure you really want to drop it as you'll not be asked for confirmation.<br><br>You might need to include a separate DB_URL if your `mongodb` is on a different machine over the network.
+
+## 3. Feedback
 
 I have done my very best to follow SOLID, DRY and KISS principles to the best of my knowledge. However, I may fall short on some instances.
 
