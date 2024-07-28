@@ -4,6 +4,8 @@
   "description": "REST API for my anime list",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon --inspect .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,5 +16,13 @@
     "MongoDB"
   ],
   "author": "Suman Adhikari",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
