@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./database/mongodb');
 const express = require('express');
 const routes = require('./routes');
 

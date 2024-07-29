@@ -1,4 +1,8 @@
 {
+    "signal": "SIGHUP",
     "verbose": true,
-    "ignore": ["nodemon.json"]
+    "ignore": ["nodemon.json"],
+    "env": {
+        "NODE_ENV": "development"
+    }
 }
