@@ -21,7 +21,7 @@ router
   .post(characterController.addOne);
 
 router
-  .route("/animes/:id/characters/:character-id")
+  .route("/animes/:id/characters/:characterId")
   .get(characterController.findOne)
   .put(characterController.updateOne)
   .patch(characterController.partiallyUpdateOne)
