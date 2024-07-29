@@ -19,9 +19,18 @@ const anime_addOne = function (anime) {
   return animeModel.create(anime);
 };
 
+const anime_updateOne = function(animeId, anime){
+  const filter = {_id: new ObjectId(animeId)};
+  const change = {$set: anime};
+
+  return animeModel.updateOne(filter, change);
+}
+
 const anime_findAllPaginatedCallback = callbackify(anime_findAllPaginated);
 const anime_findByIdCallback = callbackify(anime_findById);
 const anime_createCallback = callbackify(anime_addOne);
+const anime_updateOneByCallback = callbackify(anime_updateOne);
+const anime_partiallyUpdateOneByCallback = callbackify(anime_updateOne);
 
 const anime_onMongooseResponseCallback = function (req, res) {
   return function (error, anime) {
@@ -90,8 +99,6 @@ const findAllWithPagination = function (req, res) {
 };
 
 const addOne = function (req, res) {
-console.log(req.body);
-
   if (!req.body) {
     res.status(400).json({
       error: "Body cannot be empty.",
@@ -110,11 +117,71 @@ console.log(req.body);
 };
 
 const updateOne = function (req, res) {
-  res.status(200).send("Update one anime");
+  if (!req.body) {
+    res.status(400).json({
+      error: "Body cannot be empty.",
+    });
+    return;
+  }
+
+  if (req.params && req.params.id) {
+    let animeId = req.params.id;
+
+    if (!ObjectId.isValid(animeId)) {
+      res.status(400).json({
+        error: "Id is invalid.",
+      });
+      return;
+    }
+
+    const anime = {
+      name: req.body.name,
+      releaseDate: req.body.releaseDate,
+      studio: req.body.studio,
+      characters: req.body.characters,
+    };
+
+    anime_updateOneByCallback(animeId, anime, anime_onMongooseResponseCallback(req, res));
+    
+  } else {
+    res.status(400).json({
+      error: "Id is required.",
+    });
+  }
 };
 
 const partiallyUpdateOne = function (req, res) {
-  res.status(200).send("Patch one anime");
+  if (!req.body) {
+    res.status(400).json({
+      error: "Body cannot be empty.",
+    });
+    return;
+  }
+
+  if (req.params && req.params.id) {
+    let animeId = req.params.id;
+
+    if (!ObjectId.isValid(animeId)) {
+      res.status(400).json({
+        error: "Id is invalid.",
+      });
+      return;
+    }
+
+    const anime = {
+      name: req.body.name,
+      releaseDate: req.body.releaseDate,
+      studio: req.body.studio,
+      characters: req.body.characters,
+    };
+
+    anime_partiallyUpdateOneByCallback(animeId, anime, anime_onMongooseResponseCallback(req, res));
+    
+  } else {
+    res.status(400).json({
+      error: "Id is required.",
+    });
+  }
 };
 
 const deleteOne = function (req, res) {
