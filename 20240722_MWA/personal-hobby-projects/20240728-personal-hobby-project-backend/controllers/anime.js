@@ -19,18 +19,25 @@ const anime_addOne = function (anime) {
   return animeModel.create(anime);
 };
 
-const anime_updateOne = function(animeId, anime){
-  const filter = {_id: new ObjectId(animeId)};
-  const change = {$set: anime};
+const anime_updateOne = function (animeId, anime) {
+  const filter = { _id: new ObjectId(animeId) };
+  const change = { $set: anime };
 
   return animeModel.updateOne(filter, change);
-}
+};
+
+const anime_deleteOne = function (animeId) {
+  const filter = { _id: new ObjectId(animeId) };
+
+  return animeModel.deleteOne(filter);
+};
 
 const anime_findAllPaginatedCallback = callbackify(anime_findAllPaginated);
 const anime_findByIdCallback = callbackify(anime_findById);
 const anime_createCallback = callbackify(anime_addOne);
-const anime_updateOneByCallback = callbackify(anime_updateOne);
-const anime_partiallyUpdateOneByCallback = callbackify(anime_updateOne);
+const anime_updateOneCallback = callbackify(anime_updateOne);
+const anime_partiallyUpdateOneCallback = callbackify(anime_updateOne);
+const anime_deleteOneCallback = callbackify(anime_deleteOne);
 
 const anime_onMongooseResponseCallback = function (req, res) {
   return function (error, anime) {
@@ -141,8 +148,11 @@ const updateOne = function (req, res) {
       characters: req.body.characters,
     };
 
-    anime_updateOneByCallback(animeId, anime, anime_onMongooseResponseCallback(req, res));
-    
+    anime_updateOneCallback(
+      animeId,
+      anime,
+      anime_onMongooseResponseCallback(req, res)
+    );
   } else {
     res.status(400).json({
       error: "Id is required.",
@@ -175,8 +185,11 @@ const partiallyUpdateOne = function (req, res) {
       characters: req.body.characters,
     };
 
-    anime_partiallyUpdateOneByCallback(animeId, anime, anime_onMongooseResponseCallback(req, res));
-    
+    anime_partiallyUpdateOneCallback(
+      animeId,
+      anime,
+      anime_onMongooseResponseCallback(req, res)
+    );
   } else {
     res.status(400).json({
       error: "Id is required.",
@@ -185,7 +198,22 @@ const partiallyUpdateOne = function (req, res) {
 };
 
 const deleteOne = function (req, res) {
-  res.status(200).send("Deleted one anime");
+  if (req.params && req.params.id) {
+    let animeId = req.params.id;
+
+    if (!ObjectId.isValid(animeId)) {
+      res.status(400).json({
+        error: "Id is invalid.",
+      });
+      return;
+    }
+
+    anime_deleteOneCallback(animeId, anime_onMongooseResponseCallback(req, res));
+  } else {
+    res.status(400).json({
+      error: "Id is required.",
+    });
+  }
 };
 
 module.exports = {
