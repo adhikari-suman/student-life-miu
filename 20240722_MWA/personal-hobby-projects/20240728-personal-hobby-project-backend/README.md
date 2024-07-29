@@ -30,6 +30,7 @@ Project by default doesn't have a `.env` file. You will need to setup a `.env` f
 ```
 PORT=< APP-PORT-HERE >
 MONGODB_CONNECTION_URL = < MONGODB-CONNECTION-URL-HERE>
+MONGODB_DATABASE_NAME = < MONGODB-DATABASE-NAME-HERE >
 ```
 
 Sample `.env` would look as follows:
@@ -39,6 +40,7 @@ Sample `.env` would look as follows:
 ```
 PORT=3000
 MONGODB_CONNECTION_URL = mongodb://localhost:27017/japaneseAnime
+MONGODB_DATABASE_NAME = japaneseAnime
 ```
 
 ## 2. Importing Data to MongoDB
