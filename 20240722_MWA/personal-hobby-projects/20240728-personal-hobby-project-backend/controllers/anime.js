@@ -1,5 +1,6 @@
 const { error } = require("console");
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const MongoDBConstants = require("../constants").MongoDBConstants;
 const callbackify = require("util").callbackify;
 const animeModel = mongoose.model(MongoDBConstants.MODEL_ANIME);
@@ -10,25 +11,53 @@ const anime_findAllPaginated = function (page, size) {
   return animeModel.find().skip(offset).limit(size).exec();
 };
 
-const anime_findAllPaginatedCallback = callbackify(anime_findAllPaginated);
-
-const anime_onMongooseResponseCallback = function (req, res){
-    return function (error, anime) {
-        if (error) {
-          console.log(error);
-    
-          res.status(500).json({
-            error: "Something went wrong.",
-          });
-        } else {
-          res.status(200).json(anime);
-        }
-      };
+const anime_findById = function(animeId){
+    return animeModel.findById(animeId);
 }
 
 
+
+const anime_findAllPaginatedCallback = callbackify(anime_findAllPaginated);
+const anime_findByIdCallback = callbackify(anime_findById);
+
+const anime_onMongooseResponseCallback = function (req, res) {
+  return function (error, anime) {
+    if (error) {
+      console.log(error);
+
+      res.status(500).json({
+        error: "Something went wrong.",
+      });
+    } else {
+
+      if(anime == null){
+        res.status(404).json({
+          error: 'Anime not found.'
+        });
+      } else {
+        res.status(200).json(anime);
+      }
+    }
+  };
+};
+
 const findOne = function (req, res) {
-  res.status(200).send("Found one anime");
+    if(req.params && req.params.id){
+        let animeId = req.params.id;
+
+        if(!ObjectId.isValid(animeId)){
+            res.status(400).json({
+                error: "Id is invalid."
+            })
+            return; 
+        }
+
+        anime_findByIdCallback(animeId, anime_onMongooseResponseCallback(req, res));
+    } else {
+        res.status(400).json({
+            error: "Id is required."
+        })
+    } 
 };
 
 const findAllWithPagination = function (req, res) {
@@ -51,7 +80,11 @@ const findAllWithPagination = function (req, res) {
     return;
   }
 
-  anime_findAllPaginatedCallback(page, size, anime_onMongooseResponseCallback(req, res));
+  anime_findAllPaginatedCallback(
+    page,
+    size,
+    anime_onMongooseResponseCallback(req, res)
+  );
 };
 
 const addOne = function (req, res) {
