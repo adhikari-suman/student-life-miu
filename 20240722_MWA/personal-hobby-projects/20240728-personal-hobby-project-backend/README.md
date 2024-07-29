@@ -38,15 +38,15 @@ Sample `.env` would look as follows:
 
 ```
 PORT=3000
-MONGODB_CONNECTION_URL = mongodb://localhost:27017/japaneseAnimes
+MONGODB_CONNECTION_URL = mongodb://localhost:27017/japaneseAnime
 ```
 
 ## 2. Importing Data to MongoDB
 
-We have a file inside `data/backup/animes.json`
+We have a file inside `data/anime.json`
 
 ```bash
-mongoimport -d japaneseAnimes -c animes --file=data/animes.json --jsonArray --drop
+mongoimport -d japaneseAnime -c anime --file=data/anime.json --jsonArray --drop
 ```
 
 >**NOTE:** Be careful when copy-pasting above commands. We are dropping all data before importing the collection. Make sure you really want to drop it as you'll not be asked for confirmation.<br><br>You might need to include a separate DB_URL if your `mongodb` is on a different machine over the network.
