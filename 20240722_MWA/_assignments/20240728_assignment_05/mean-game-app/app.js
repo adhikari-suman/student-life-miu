@@ -1,11 +1,11 @@
 require('dotenv').config();
-require('./database/mongodb').openConnection();
+require('./database/mongodb');
 const fs = require('fs');
 const path = require('path');
 
 
 
-const routes = require('./routes');
+const routes = require('./routes/routes');
 const express = require('express');
 const json = express.json;
 const urlencoded = express.urlencoded;
