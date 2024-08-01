@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { GamesComponent } from './games/games.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 export const routes: Routes = [
     {
@@ -15,7 +16,9 @@ export const routes: Routes = [
         path: "games", component: GamesComponent
     },
     {
-        path: "game", component: GameComponent
-    }
-
+        path: "game/:gameId", component: GameComponent
+    },
+    {
+        path: "**", component: ErrorPageComponent
+    },
 ];
