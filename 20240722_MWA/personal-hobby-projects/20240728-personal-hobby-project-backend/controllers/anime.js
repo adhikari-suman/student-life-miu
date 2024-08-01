@@ -1,9 +1,7 @@
-const { error } = require("console");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
-const MongoDBConstants = require("../constants").MongoDBConstants;
 const callbackify = require("util").callbackify;
-const animeModel = mongoose.model(MongoDBConstants.MODEL_ANIME);
+const animeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
 
 const anime_findAllPaginated = function (page, size) {
   let offset = (page - 1) * size;
@@ -42,18 +40,16 @@ const anime_deleteOneCallback = callbackify(anime_deleteOne);
 const anime_onMongooseResponseCallback = function (req, res) {
   return function (error, anime) {
     if (error) {
-      console.log(error);
-
-      res.status(500).json({
-        error: "Something went wrong.",
+      res.status(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR).json({
+        error: process.env.ERROR_RESPONSE_SOMETHING_WENT_WRONG,
       });
     } else {
       if (anime == null) {
-        res.status(404).json({
-          error: "Anime not found.",
+        res.status(process.env.HTTP_STATUS_NOT_FOUND).json({
+          error: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
         });
       } else {
-        res.status(200).json(anime);
+        res.status(process.env.HTTP_STATUS_OK).json(anime);
       }
     }
   };
@@ -64,16 +60,16 @@ const findOne = function (req, res) {
     let animeId = req.params.id;
 
     if (!ObjectId.isValid(animeId)) {
-      res.status(400).json({
-        error: "Id is invalid.",
+      res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+        error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
       });
       return;
     }
 
     anime_findByIdCallback(animeId, anime_onMongooseResponseCallback(req, res));
   } else {
-    res.status(400).json({
-      error: "Id is required.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_ID_REQUIRED,
     });
   }
 };
@@ -81,6 +77,7 @@ const findOne = function (req, res) {
 const findAllWithPagination = function (req, res) {
   let page = parseInt(process.env.QUERY_PAGE_DEFAULT);
   let size = parseInt(process.env.QUERY_SIZE_DEFAULT);
+  const maxSize = parseInt(process.env.QUERY_MAX_SIZE_DEFAULT);
 
   if (req.query && req.query.page) {
     page = parseInt(req.query.page);
@@ -90,10 +87,10 @@ const findAllWithPagination = function (req, res) {
     size = parseInt(req.query.size);
   }
 
-  if (isNaN(page) || isNaN(size) || page < 1 || size < 1 || size > 20) {
-    res.status(400).json({
+  if (isNaN(page) || isNaN(size) || page < 1 || size < 1 || size > maxSize) {
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
       error:
-        "Page and size must be greater than one and size cannot be greater than 20.",
+      getPageAndMaxSizeErrorMessage(maxSize),
     });
     return;
   }
@@ -107,8 +104,8 @@ const findAllWithPagination = function (req, res) {
 
 const addOne = function (req, res) {
   if (!req.body) {
-    res.status(400).json({
-      error: "Body cannot be empty.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_EMPTY_REQUEST_BODY,
     });
     return;
   }
@@ -125,8 +122,8 @@ const addOne = function (req, res) {
 
 const updateOne = function (req, res) {
   if (!req.body) {
-    res.status(400).json({
-      error: "Body cannot be empty.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_EMPTY_REQUEST_BODY,
     });
     return;
   }
@@ -135,8 +132,8 @@ const updateOne = function (req, res) {
     let animeId = req.params.id;
 
     if (!ObjectId.isValid(animeId)) {
-      res.status(400).json({
-        error: "Id is invalid.",
+      res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+        error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
       });
       return;
     }
@@ -154,16 +151,16 @@ const updateOne = function (req, res) {
       anime_onMongooseResponseCallback(req, res)
     );
   } else {
-    res.status(400).json({
-      error: "Id is required.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_ID_REQUIRED,
     });
   }
 };
 
 const partiallyUpdateOne = function (req, res) {
   if (!req.body) {
-    res.status(400).json({
-      error: "Body cannot be empty.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_EMPTY_REQUEST_BODY,
     });
     return;
   }
@@ -172,8 +169,8 @@ const partiallyUpdateOne = function (req, res) {
     let animeId = req.params.id;
 
     if (!ObjectId.isValid(animeId)) {
-      res.status(400).json({
-        error: "Id is invalid.",
+      res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+        error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
       });
       return;
     }
@@ -191,8 +188,8 @@ const partiallyUpdateOne = function (req, res) {
       anime_onMongooseResponseCallback(req, res)
     );
   } else {
-    res.status(400).json({
-      error: "Id is required.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_ID_REQUIRED,
     });
   }
 };
@@ -202,19 +199,23 @@ const deleteOne = function (req, res) {
     let animeId = req.params.id;
 
     if (!ObjectId.isValid(animeId)) {
-      res.status(400).json({
-        error: "Id is invalid.",
+      res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+        error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
       });
       return;
     }
 
     anime_deleteOneCallback(animeId, anime_onMongooseResponseCallback(req, res));
   } else {
-    res.status(400).json({
-      error: "Id is required.",
+    res.status(process.env.HTTP_STATUS_BAD_REQUEST).json({
+      error: process.env.ERROR_RESPONSE_ID_REQUIRED,
     });
   }
 };
+
+const getPageAndMaxSizeErrorMessage= function(maxSize){
+  return `${process.env.ERROR_RESPONSE_INVALID_PAGE_AND_SIZE_PARAMS} ${maxSize}.`
+}
 
 module.exports = {
   findOne,
