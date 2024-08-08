@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const callbackify = require("util").callbackify;
-const sendResponse = require('../utils/send_response');
+const sendResponse = require('../../utils/send_response');
 const Anime = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
 const characterDocumentName =
     process.env.MONGODB_ANIME_CHARACTERS_DOCUMENT_NAME;
@@ -233,7 +233,7 @@ const partiallyUpdateOne = function (req, res) {
                 if (req && req.body.characteristics) {
                     character.characteristics = req.body.characteristics;
                 }
-                
+
                 anime.save().then(
                     (newAnime) => {
                         response.status = process.env.HTTP_STATUS_OK;

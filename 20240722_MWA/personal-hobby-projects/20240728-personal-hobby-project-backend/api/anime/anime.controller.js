@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
-const sendResponse = require("../utils/send_response");
+const sendResponse = require("../../utils/send_response");
 const callbackify = require("util").callbackify;
 const animeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
 
