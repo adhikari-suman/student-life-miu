@@ -1,1 +1,1 @@
-require('./anime');
+require('../../api/anime/anime.model');
