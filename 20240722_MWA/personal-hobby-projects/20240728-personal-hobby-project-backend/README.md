@@ -23,7 +23,8 @@ npm install
 
 ### 1.2 .env setup
 
-Project by default doesn't have a `.env` file. You will need to setup a `.env` file using the `.env.example` file provided.
+Project by default doesn't have a `.env` file. You will need to setup a `.env` file using the `.env.example` file
+provided.
 
 **File: .env.example**
 
@@ -51,13 +52,24 @@ We have a file inside `data/anime.json`
 mongoimport -d japaneseAnime -c anime --file=data/anime.json --jsonArray --drop
 ```
 
->**NOTE:** Be careful when copy-pasting above commands. We are dropping all data before importing the collection. Make sure you really want to drop it as you'll not be asked for confirmation.<br><br>You might need to include a separate DB_URL if your `mongodb` is on a different machine over the network.
+> **NOTE:** Be careful when copy-pasting above commands. We are dropping all data before importing the collection. Make
+> sure you really want to drop it as you'll not be asked for confirmation.<br><br>You might need to include a separate
+> DB_URL if your `mongodb` is on a different machine over the network.
 
 ## 3. Feedback
 
-I have done my very best to follow SOLID, DRY and KISS principles to the best of my knowledge. However, I may fall short on some instances.
+I have done my very best to follow SOLID, DRY and KISS principles to the best of my knowledge. However, I may fall short
+on some instances.
 
-Your feedback on sakai or my student email avaialbe to you would be greatly appreaciated. Your feedback could be the ONE thing I might be missing in my life for breaking BIG.
+Your feedback on sakai or my student email avaialbe to you would be greatly appreaciated. Your feedback could be the ONE
+thing I might be missing in my life for breaking BIG.
 
 Thank you for having your look into the project and giving me your time. I hope you have a blessed day.
 
+## 4. TODO
+
+JWT Secret Key generator
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
