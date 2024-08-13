@@ -3,14 +3,14 @@ const characterRouter = require("./character.router");
 const router = require('express').Router();
 
 router
-    .route("")
+    .route(process.env.API_SUBSET_ROUTE_EMPTY)
     .get(animeController.findAllWithPagination)
     .post(animeController.addOne);
 
-router.use('', characterRouter);
+router.use(process.env.API_SUBSET_ROUTE_EMPTY, characterRouter);
 
 router
-    .route("/:id")
+    .route(process.env.API_SUBSET_ROUTE_PARAM_ID)
     .get(animeController.findOne)
     .put(animeController.fullUpdateOne)
     .patch(animeController.partiallyUpdateOne)
