@@ -2,14 +2,14 @@ const characterController = require("./character.controller");
 const router = require('express').Router();
 
 router
-    .route("/:id/characters")
+    .route(process.env.API_ANIME_CHARACTER_SUBSET_ROUTE_CHARACTER)
     .get(characterController.findAll)
     .post(characterController.addOne);
 
 router
-    .route("/:id/characters/:characterId")
+    .route(process.env.API_ANIME_CHARACTER_SUBSET_ROUTE_CHARACTER_BY_ID)
     .get(characterController.findOne)
-    .put(characterController.updateOne)
+    .put(characterController.fullUpdateOne)
     .patch(characterController.partiallyUpdateOne)
     .delete(characterController.deleteOne);
 
