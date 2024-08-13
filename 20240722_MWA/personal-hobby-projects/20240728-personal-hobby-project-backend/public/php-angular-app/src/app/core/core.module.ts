@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from "./header/header.component";
 import {FooterComponent} from "./footer/footer.component";
 import {NavigationComponent} from "./navigation/navigation.component";
+import {ErrorComponent} from './error/error.component';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import {NavigationComponent} from "./navigation/navigation.component";
     HeaderComponent,
     FooterComponent,
     NavigationComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule
