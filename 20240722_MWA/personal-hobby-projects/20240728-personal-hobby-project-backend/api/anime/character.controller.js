@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const callbackify = require("util").callbackify;
 const sendResponse = require('../../utils/send_response');
-const Anime = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
+const AnimeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
 const characterDocumentName =
     process.env.MONGODB_ANIME_CHARACTERS_DOCUMENT_NAME;
 
 const Anime_findById = function (animeId) {
-    return Anime.findById(animeId).exec();
+    return AnimeModel.findById(animeId).exec();
 }
 
 const character_onMongooseFindOneResponseCallback = function (
@@ -51,6 +51,7 @@ const _setResponseToAnimeCharacters = (response, characters) => {
 };
 
 const _setResponseToError = (response, error) => {
+    console.log(error);
     response.status = error.status;
     response.data = error.data;
 };
@@ -82,7 +83,7 @@ const findAll = function (req, res) {
 
     const animeId = req.params.id;
 
-    Anime.findById(animeId).exec()
+    AnimeModel.findById(animeId).exec()
         .then((anime) => _doesAnimeExist(anime))
         .then(anime => _setResponseToAnimeCharacters(response, anime.characters))
         .catch((error) => _setResponseToError(response, error))
@@ -112,13 +113,12 @@ const findOne = function (req, res) {
     const animeId = req.params.id;
     const characterId = req.params.characterId;
 
-    Anime.findById(animeId).exec()
+    AnimeModel.findById(animeId).exec()
         .then((anime) => _doesAnimeExist(anime))
         .then(anime => _setResponseToAnimeCharacter(response, anime.characters, characterId))
         .catch((error) => _setResponseToError(response, error))
         .finally(() => sendResponse(res, response));
 };
-
 
 const _addNewCharacter = (anime, newCharacter) => {
     return new Promise((resolve, reject) => {
@@ -127,6 +127,7 @@ const _addNewCharacter = (anime, newCharacter) => {
         resolve(anime);
     });
 };
+
 const addOne = function (req, res) {
     const response = {
         status: parseInt(process.env.HTTP_STATUS_CREATED),
@@ -141,7 +142,7 @@ const addOne = function (req, res) {
     }
 
 
-    Anime.findById(animeId).exec()
+    AnimeModel.findById(animeId).exec()
         .then((anime) => _doesAnimeExist(anime))
         .then(anime => _addNewCharacter(anime, newCharacter))
         .then(anime => anime.save())
@@ -161,6 +162,7 @@ const _doesAnimeCharacterExist = (anime, characterId) => {
 
             reject(error);
         } else {
+            console.log('_doesAnimeCharacterExist resolved');
             resolve(anime);
         }
 
@@ -210,7 +212,7 @@ const updateOne = function (req, res, updateFunction) {
         characteristics: req.body.characteristics,
     }
 
-    Anime.findById(animeId).exec()
+    AnimeModel.findById(animeId).exec()
         .then((anime) => _doesAnimeExist(anime))
         .then((anime) => _doesAnimeCharacterExist(anime, characterId))
         .then(anime => updateFunction(anime, characterId, update))
@@ -229,57 +231,51 @@ const partiallyUpdateOne = function (req, res) {
     updateOne(req, res, _updateAnimeCharacterPartial);
 };
 
+const _removeCharacterFromAnime = (anime, characterId) => {
+    return new Promise((resolve, reject) => {
+
+        console.log('_removeCharacterFromAnime reached');
+        const character = anime.characters.id(characterId);
+
+        if (character) {
+            console.log(character);
+            character.remove();
+        }
+
+        console.log('_removeCharacterFromAnime resolved');
+        resolve(anime);
+    });
+};
+
+const _setResponseToInternalServerError = (response, error) => {
+    response.status = parseInt(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR);
+    response.data = error;
+};
 const deleteOne = function (req, res) {
     const animeId = req.params.id;
     const characterId = req.params.characterId;
 
     const response = {
-        status: process.env.HTTP_STATUS_OKs,
+        status: parseInt(process.env.HTTP_STATUS_NO_CONTENT), // Default status
         data: null,
-    }
+    };
 
-    Anime_findById(animeId).then(anime => {
-        if (anime === null) {
-            response.status = process.env.HTTP_STATUS_NOT_FOUND;
-            response.data = {
-                error: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
-            }
 
-            sendResponse(res, response);
-        } else {
-            const character = anime.characters.id(characterId);
-
-            if (character === null) {
-                response.status = process.env.HTTP_STATUS_NOT_FOUND;
-                response.data = {
-                    error: process.env.ERROR_RESPONSE_CHARACTER_NOT_FOUND,
-                };
-
-                sendResponse(res, response);
-            } else {
-                // TODO: FIX Later
-                anime.characters.pull({_id: characterId})
-
-                anime.save().then(
-                    (newAnime) => {
-                        response.status = process.env.HTTP_STATUS_OK;
-                        response.data = anime;
-                    }
-                ).catch(error => {
-                    response.status = process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR;
-                    response.data = process.env.ERROR_RESPONSE_SOMETHING_WENT_WRONG;
-                }).finally(() => {
-                    sendResponse(res, response);
-                });
-            }
+    const filter = {
+        $pull: {
+            characters: {_id: characterId},
         }
-    }).catch((error) => {
+    };
 
-        response.status = process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR;
-        response.data = process.env.ERROR_RESPONSE_SOMETHING_WENT_WRONG;
+    const options = {new: true};
 
-        sendResponse(res, response);
-    });
+
+    AnimeModel.findByIdAndUpdate(animeId, filter, options).exec()
+        .then((anime) => _doesAnimeExist(anime))
+        .catch((error) => _setResponseToInternalServerError(response, error))
+        .finally(() => {
+            sendResponse(res, response);
+        });
 };
 
 module.exports = {
