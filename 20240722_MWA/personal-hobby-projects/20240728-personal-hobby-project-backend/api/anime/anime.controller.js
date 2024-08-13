@@ -263,22 +263,42 @@ const findAllWithPagination = function (req, res) {
     }
 };
 
+const _setResponseToAnimeCreated = (response, animeCreated) => {
+    response.status = parseInt(process.env.HTTP_STATUS_CREATED);
+    response.data = animeCreated;
+};
+
+const _setResponseToAnimeCreateFailedError = (response, error) => {
+    response.status = parseInt(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR);
+    response.data = error;
+};
 const addOne = function (req, res) {
+    const httpStatusCreated = parseInt(process.env.HTTP_STATUS_CREATED);
+
+    const response = {
+        status: httpStatusCreated,
+        data: null,
+    }
+
     if (!req.body) {
-        res.status(HTTP_STATUS_BAD_REQUEST).json({
-            error: process.env.ERROR_RESPONSE_EMPTY_REQUEST_BODY,
-        });
+        response.status = parseInt(process.env.HTTP_STATUS_BAD_REQUEST);
+        response.data = process.env.ERROR_RESPONSE_EMPTY_REQUEST_BODY;
+
+        sendResponse(res, response);
         return;
     }
 
-    const anime = {
+    const newAnime = {
         name: req.body.name,
         releaseDate: req.body.releaseDate,
         studio: req.body.studio,
         characters: req.body.characters,
     };
 
-    anime_createWithCallback(anime, anime_onMongooseResponseCallback(res));
+    AnimeModel.create(newAnime)
+        .then(animeCreated => _setResponseToAnimeCreated(response, animeCreated))
+        .catch(error => _setResponseToAnimeCreateFailedError(response, error))
+        .finally(() => sendResponse(res, response));
 };
 
 const fullUpdateOne = function (req, res) {
