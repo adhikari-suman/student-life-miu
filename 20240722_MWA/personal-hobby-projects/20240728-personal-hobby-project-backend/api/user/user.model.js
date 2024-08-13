@@ -14,8 +14,8 @@ const userSchema = mongoose.Schema({
     fullName: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 80,
+        minlength: parseInt(process.env.MONGODB_USER_MODEL_NAME_MIN),
+        maxlength: parseInt(process.env.MONGODB_USER_MODEL_NAME_MAX),
     },
     password: {
         type: String,

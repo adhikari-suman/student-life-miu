@@ -3,14 +3,14 @@ const router = require('express').Router();
 const authenticate = require("./auth.middleware");
 
 router
-    .route('/authenticate')
+    .route(process.env.API_SUBSET_ROUTE_AUTHENTICATION_ROUTE)
     .post(userController.login);
 
 router
-    .route('')
+    .route(process.env.API_SUBSET_ROUTE_EMPTY)
     .post(userController.register);
 
-router.route('/:username')
+router.route(process.env.API_SUBSET_ROUTE_FIND_BY_USERNAME_ROUTE)
     .get(authenticate, userController.findOne);
 
 module.exports = router;
