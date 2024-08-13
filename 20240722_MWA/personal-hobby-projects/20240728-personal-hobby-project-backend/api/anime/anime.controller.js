@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const sendResponse = require("../../utils/send_response");
+const {parse} = require("dotenv");
 const callbackify = require("util").callbackify;
-const animeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
+const AnimeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
 
 const HTTP_STATUS_OK = parseInt(process.env.HTTP_STATUS_OK)
 const HTTP_STATUS_BAD_REQUEST = parseInt(process.env.HTTP_STATUS_BAD_REQUEST)
@@ -12,15 +13,15 @@ const HTTP_STATUS_INTERNAL_SERVER_ERROR = parseInt(process.env.HTTP_STATUS_INTER
 const anime_findAllPaginated = function (page, size) {
     let offset = (page - 1) * size;
 
-    return animeModel.find().skip(offset).limit(size).exec();
+    return AnimeModel.find().skip(offset).limit(size).exec();
 };
 
 const anime_findById = function (animeId) {
-    return animeModel.findById(animeId);
+    return AnimeModel.findById(animeId);
 };
 
 const anime_addOne = function (anime) {
-    return animeModel.create(anime);
+    return AnimeModel.create(anime);
 };
 
 const anime_saveOne = function (anime) {
@@ -31,13 +32,13 @@ const anime_updateOne = function (animeId, anime) {
     const filter = {_id: new ObjectId(animeId)};
     const change = {$set: anime};
 
-    return animeModel.updateOne(filter, change);
+    return AnimeModel.updateOne(filter, change);
 };
 
 const anime_deleteOne = function (animeId) {
     const filter = {_id: new ObjectId(animeId)};
 
-    return animeModel.deleteOne(filter);
+    return AnimeModel.deleteOne(filter);
 };
 
 const anime_findAllPaginatedWithCallback = callbackify(anime_findAllPaginated);
@@ -181,22 +182,51 @@ const anime_onMongooseResponseCallback = function (res) {
     return responseHandler;
 };
 
-const findOne = function (req, res) {
-    if (req.params && req.params.id) {
-        let animeId = req.params.id;
+const _doesAnimeExist = anime => {
+    return new Promise((resolve, reject) => {
+        if (!anime) {
+            const error = {
+                status: parseInt(process.env.HTTP_STATUS_NOT_FOUND),
+                data: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
+            }
 
-        if (!ObjectId.isValid(animeId)) {
-            res.status(HTTP_STATUS_BAD_REQUEST).json({
-                error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
-            });
-            return;
+            reject(error);
+        } else {
+            resolve(anime);
         }
 
-        anime_findByIdWithCallback(animeId, anime_onMongooseResponseCallback(res));
+    });
+};
+
+const _setResponseToError = (response, error) => {
+    response.status = error.status;
+    response.error = error.data;
+};
+
+const _setResponseToAnime = (response, anime) => {
+    response.status = parseInt(process.env.HTTP_STATUS_OK);
+    response.data = anime;
+};
+
+const findOne = function (req, res) {
+    const animeId = req.params.id;
+
+    const response = {
+        status: parseInt(process.env.HTTP_STATUS_OK),
+        data: null,
+    }
+
+    if (animeId === null || animeId === undefined || !ObjectId.isValid(animeId)) {
+        response.status = parseInt(process.env.HTTP_STATUS_BAD_REQUEST)
+        response.data = process.env.ERROR_RESPONSE_INVALID_OBJECT_ID;
+
+        sendResponse(res, response);
     } else {
-        res.status(HTTP_STATUS_BAD_REQUEST).json({
-            error: process.env.ERROR_RESPONSE_ID_REQUIRED,
-        });
+        AnimeModel.findById(animeId).exec()
+            .then(anime => _doesAnimeExist(anime))
+            .then(anime => _setResponseToAnime(response, anime))
+            .catch(error => _setResponseToError(response, error))
+            .finally(() => sendResponse(res, response));
     }
 };
 
@@ -214,12 +244,15 @@ const findAllWithPagination = function (req, res) {
     }
 
     if (isNaN(page) || isNaN(size) || page < 1 || size < 1 || size > maxSize) {
+
+
         res.status(HTTP_STATUS_BAD_REQUEST).json({
             error:
                 getPageAndMaxSizeErrorMessage(maxSize),
         });
         return;
     }
+
 
     anime_findAllPaginatedWithCallback(
         page,
