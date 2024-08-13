@@ -1,34 +1,7 @@
 const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
-const callbackify = require("util").callbackify;
 const sendResponse = require('../../utils/send_response');
 const AnimeModel = mongoose.model(process.env.MONGODB_ANIME_MODEL_NAME);
-const characterDocumentName =
-    process.env.MONGODB_ANIME_CHARACTERS_DOCUMENT_NAME;
 
-const Anime_findById = function (animeId) {
-    return AnimeModel.findById(animeId).exec();
-}
-
-const character_onMongooseFindOneResponseCallback = function (
-    req,
-    res,
-    characterId
-) {
-    return function (error, anime) {
-        if (error) {
-            res.status(500).json({error: "Something went wrong."});
-        } else {
-            let character = anime.characters.id(characterId);
-
-            if (character == null) {
-                res.status(404).json({error: "Character not found."});
-            } else {
-                res.status(200).json(character);
-            }
-        }
-    };
-};
 
 const _doesAnimeExist = anime => {
     return new Promise((resolve, reject) => {
@@ -55,25 +28,6 @@ const _setResponseToError = (response, error) => {
     response.status = error.status;
     response.data = error.data;
 };
-
-const _doesCharacterExist = (anime, characterId) => {
-    return new Promise((resolve, reject) => {
-
-        const character = anime.characters.id(characterId);
-
-        if (!character) {
-            const error = {
-                status: parseInt(process.env.HTTP_STATUS_NOT_FOUND),
-                data: process.env.ERROR_RESPONSE_CHARACTER_NOT_FOUND,
-            }
-
-            reject(error);
-        } else {
-            resolve(anime);
-        }
-    });
-};
-
 
 const findAll = function (req, res) {
     const response = {
@@ -231,26 +185,11 @@ const partiallyUpdateOne = function (req, res) {
     updateOne(req, res, _updateAnimeCharacterPartial);
 };
 
-const _removeCharacterFromAnime = (anime, characterId) => {
-    return new Promise((resolve, reject) => {
-
-        console.log('_removeCharacterFromAnime reached');
-        const character = anime.characters.id(characterId);
-
-        if (character) {
-            console.log(character);
-            character.remove();
-        }
-
-        console.log('_removeCharacterFromAnime resolved');
-        resolve(anime);
-    });
-};
-
 const _setResponseToInternalServerError = (response, error) => {
     response.status = parseInt(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR);
     response.data = error;
 };
+
 const deleteOne = function (req, res) {
     const animeId = req.params.id;
     const characterId = req.params.characterId;
