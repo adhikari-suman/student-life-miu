@@ -31,31 +31,58 @@ const character_onMongooseFindOneResponseCallback = function (
     };
 };
 
+const getOnfulfilled = (response, anime) => {
+
+    if (anime === null) {
+        response.status = process.env.HTTP_STATUS_NOT_FOUND;
+        response.data = {
+            error: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
+        }
+    } else {
+        response.status = process.env.HTTP_STATUS_OK;
+        response.data = anime.characters;
+    }
+};
+
+const _doesAnimeExist = anime => {
+    return new Promise((resolve, reject) => {
+        if (!anime) {
+            const error = {
+                status: parseInt(process.env.HTTP_STATUS_NOT_FOUND),
+                data: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
+            }
+
+            reject(error);
+        } else {
+            resolve(anime);
+        }
+
+    });
+};
+
+const _setResponseToAnimeCharacters = (response, characters) => {
+    response.status = parseInt(process.env.HTTP_STATUS_OK);
+    response.data = characters;
+};
+
+const _setResponseToError = (response, error) => {
+    response.status = error.status;
+    response.data = error.data;
+};
+
 const findAll = function (req, res) {
     const response = {
-        status: process.env.HTTP_STATUS_OKs,
+        status: parseInt(process.env.HTTP_STATUS_OK),
         data: null,
     }
 
     const animeId = req.params.id;
 
-    Anime_findById(animeId).then(anime => {
-        if (anime === null) {
-            response.status = process.env.HTTP_STATUS_NOT_FOUND;
-            response.data = {
-                error: process.env.ERROR_RESPONSE_ANIME_NOT_FOUND,
-            }
-        } else {
-            response.status = process.env.HTTP_STATUS_OK;
-            response.data = anime.characters;
-        }
-    }).catch((error) => {
-        response.status = process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR;
-        response.data = process.env.ERROR_RESPONSE_SOMETHING_WENT_WRONG;
-    }).finally(() => {
-        sendResponse(res, response);
-    });
-
+    Anime.findById(animeId).exec()
+        .then((anime) => _doesAnimeExist(anime))
+        .then(anime => _setResponseToAnimeCharacters(response, anime.characters))
+        .catch((error) => _setResponseToError(response, error))
+        .finally(() => sendResponse(res, response));
 };
 
 const findOne = function (req, res) {
@@ -313,7 +340,7 @@ const deleteOne = function (req, res) {
 
 module.exports = {
     findOne,
-    findAllWithPagination: findAll,
+    findAll,
     addOne,
     updateOne,
     partiallyUpdateOne,

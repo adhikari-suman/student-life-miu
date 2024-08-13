@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router
     .route("/:id/characters")
-    .get(characterController.findAllWithPagination)
+    .get(characterController.findAll)
     .post(characterController.addOne);
 
 router
