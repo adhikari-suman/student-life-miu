@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const characterSchema = require("./character.model");
-const MongoDBConstants = require("../../constants").MongoDBConstants;
 
 const animeSchema = mongoose.Schema({
     name: {
         type: String,
-        min: 3,
-        max: 50,
+        min: parseInt(process.env.MONGODB_ANIME_MODEL_NAME_MIN),
+        max: parseInt(process.env.MONGODB_ANIME_MODEL_NAME_MAX),
         required: true,
     },
     releaseDate: {
@@ -15,15 +14,15 @@ const animeSchema = mongoose.Schema({
     },
     studio: {
         type: String,
-        min: 2,
-        max: 50,
+        min: parseInt(process.env.MONGODB_ANIME_MODEL_STUDIO_MIN),
+        max: parseInt(process.env.MONGODB_ANIME_MODEL_STUDIOS_MAX),
         required: true,
     },
     characters: [characterSchema],
 });
 
 mongoose.model(
-    MongoDBConstants.MODEL_ANIME,
+    process.env.MONGODB_ANIME_MODEL_NAME,
     animeSchema,
-    MongoDBConstants.COLLECTION_ANIME
+    process.env.MONGODB_ANIME_COLLECTION_NAME
 );
