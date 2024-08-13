@@ -272,6 +272,7 @@ const _setResponseToAnimeCreateFailedError = (response, error) => {
     response.status = parseInt(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR);
     response.data = error;
 };
+
 const addOne = function (req, res) {
     const httpStatusCreated = parseInt(process.env.HTTP_STATUS_CREATED);
 
@@ -309,22 +310,36 @@ const partiallyUpdateOne = function (req, res) {
     anime_findByIdWithCallback(req.params.id, anime_partialUpdateOne_onFindByIdWithCallback_HandleResponse(req, res));
 };
 
+const _setResponseToDeleteAnimeSuccess = (response) => {
+    response.status = parseInt(process.env.HTTP_STATUS_NO_CONTENT)
+    response.data = null;
+};
+
+const _setResponseToDeleteAnimeFailed = (response, error) => {
+    response.status = parseInt(process.env.HTTP_STATUS_INTERNAL_SERVER_ERROR)
+    response.data = error;
+};
+
 const deleteOne = function (req, res) {
-    if (req.params && req.params.id) {
-        let animeId = req.params.id;
+    const animeId = req.params.id;
 
-        if (!ObjectId.isValid(animeId)) {
-            res.status(HTTP_STATUS_BAD_REQUEST).json({
-                error: process.env.ERROR_RESPONSE_INVALID_OBJECT_ID,
-            });
-            return;
-        }
+    const response = {
+        status: parseInt(process.env.HTTP_STATUS_NO_CONTENT),
+        data: null,
+    }
 
-        anime_deleteOneWithCallback(animeId, anime_onMongooseResponseCallback(res));
+    if (animeId === null || animeId === undefined || !ObjectId.isValid(animeId)) {
+        response.status = parseInt(process.env.HTTP_STATUS_BAD_REQUEST)
+        response.data = process.env.ERROR_RESPONSE_INVALID_OBJECT_ID;
+
+        sendResponse(res, response);
     } else {
-        res.status(HTTP_STATUS_BAD_REQUEST).json({
-            error: process.env.ERROR_RESPONSE_ID_REQUIRED,
-        });
+        const filter = {_id: new ObjectId(animeId)};
+
+        AnimeModel.deleteOne(filter).exec()
+            .then(() => _setResponseToDeleteAnimeSuccess(response))
+            .catch(error => _setResponseToDeleteAnimeFailed(response, error))
+            .finally(() => sendResponse(res, response));
     }
 };
 
