@@ -1,10 +1,16 @@
 const jwt = require('jsonwebtoken');
+const sendResponse = require('../../utils/send_response');
 
 const authenticate = function (req, res, next) {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.headers[process.env.HEADER_AUTHORIZATION];
 
     if (!authHeader) {
-        res.status(401).json({error: 'No token provided'});
+        const response = {
+            status: parseInt(process.env.HTTP_STATUS_UNAUTHORIZED),
+            data: process.env.ERROR_RESPONSE_TOKEN_NOT_FOUND
+        }
+
+        sendResponse(res, response);
         return;
     }
 
@@ -13,9 +19,12 @@ const authenticate = function (req, res, next) {
         jwt.verify(token, process.env.JWT_SECRET_KEY);
         next();
     } catch (e) {
-        res.status(401).json({
-            error: 'Unauthorized',
-        });
+        const response = {
+            status: parseInt(process.env.HTTP_STATUS_UNAUTHORIZED),
+            data: process.env.ERROR_RESPONSE_UNAUTHORIZED
+        }
+
+        sendResponse(res, response);
     }
 }
 
