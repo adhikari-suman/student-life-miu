@@ -235,6 +235,11 @@ const findAllWithPagination = function (req, res) {
     let size = parseInt(process.env.QUERY_SIZE_DEFAULT);
     const maxSize = parseInt(process.env.QUERY_MAX_SIZE_DEFAULT);
 
+    const response = {
+        status: parseInt(process.env.HTTP_STATUS_OK),
+        data: null,
+    }
+
     if (req.query && req.query.page) {
         page = parseInt(req.query.page);
     }
@@ -244,21 +249,18 @@ const findAllWithPagination = function (req, res) {
     }
 
     if (isNaN(page) || isNaN(size) || page < 1 || size < 1 || size > maxSize) {
+        response.status = parseInt(process.env.HTTP_STATUS_BAD_REQUEST)
+        response.data = getPageAndMaxSizeErrorMessage(maxSize);
 
+        sendResponse(res, response);
+    } else {
+        const offset = (page - 1) * size;
 
-        res.status(HTTP_STATUS_BAD_REQUEST).json({
-            error:
-                getPageAndMaxSizeErrorMessage(maxSize),
-        });
-        return;
+        AnimeModel.find().skip(offset).limit(size).exec()
+            .then(anime => _setResponseToAnime(response, anime))
+            .catch(error => _setResponseToError(response, error))
+            .finally(() => sendResponse(res, response));
     }
-
-
-    anime_findAllPaginatedWithCallback(
-        page,
-        size,
-        anime_onMongooseResponseCallback(res)
-    );
 };
 
 const addOne = function (req, res) {
