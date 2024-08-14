@@ -13,6 +13,14 @@ export class AuthenticationService {
   constructor(private _http: HttpClient) {
   }
 
+  set token(token: string) {
+    localStorage.setItem(environment.accessToken, token);
+  }
+
+  get token() {
+    return localStorage.getItem(environment.accessToken) ?? '';
+  }
+
   login(username: string, password: string): Observable<LoginResponse> {
     const loginUrl = `${environment.baseUrl}${environment.loginEndpoint}`;
 
