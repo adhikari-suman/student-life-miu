@@ -1,5 +1,13 @@
 <nav>
-  <button routerLink="/home">Home</button>
-  <button routerLink="/login">Login</button>
-  <button routerLink="/register">Register</button>
+  <span>
+    <button routerLink="/home">Home</button>
+    <button routerLink="/anime">Anime</button>
+    <button routerLink="/register" *ngIf="!isLoggedIn">Register</button>
+    <button routerLink="/profile" *ngIf="isLoggedIn">Profile</button>
+  </span>
+
+  <span>
+    <button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+    <app-login *ngIf="!isLoggedIn"/>
+  </span>
 </nav>
