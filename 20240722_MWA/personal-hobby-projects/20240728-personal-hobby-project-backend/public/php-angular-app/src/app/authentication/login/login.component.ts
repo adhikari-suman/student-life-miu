@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.username,
       this.loginForm.value.password,
     ).subscribe((detail) => {
-      console.log("login response", detail.token);
-      console.log("TODO: [loginPressed] - Save Token after successful login");
+      this.authenticationService.token = detail.token;
     });
   }
 }
