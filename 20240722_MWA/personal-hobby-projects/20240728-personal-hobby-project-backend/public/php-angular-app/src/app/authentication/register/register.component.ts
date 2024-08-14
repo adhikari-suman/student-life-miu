@@ -11,6 +11,12 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent {
 
+  displayErrorMessage: boolean = false;
+  displaySuccessMessage: boolean = false;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+
+
   constructor(private _router: Router, private _authenticationService: AuthenticationService) {
   }
 
@@ -22,9 +28,21 @@ export class RegisterComponent {
       registrationForm.form.value.fullName,
     );
 
-    this._authenticationService.register(registerRequest).subscribe(
-      () => {
-        this._router.navigate(['']);
+    this._authenticationService.register(registerRequest).subscribe({
+        next: () => {
+          this.successMessage = 'User registered successfully';
+          this.displaySuccessMessage = true;
+          this.displayErrorMessage = false;
+        },
+        error: error => {
+          this.errorMessage = 'User registration failed.';
+          this.displaySuccessMessage = false;
+          this.displayErrorMessage = true;
+          console.log(error);
+        },
+        complete: () => {
+          this._router.navigate(['login']);
+        }
       }
     );
   }

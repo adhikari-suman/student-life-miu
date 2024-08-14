@@ -9,6 +9,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     LoginComponent,
     RegisterComponent,
   ],
+  exports: [
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -1,3 +1,11 @@
+<div class="error-message" *ngIf="displayErrorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div class="success-message" *ngIf="displaySuccessMessage">
+  <p>{{ successMessage }}</p>
+</div>
+
 <form #registrationForm="ngForm" (ngSubmit)="registerPressed(registrationForm)">
   <label for="fullName">Full name</label>
   <input type="text" name="fullName" id="fullName" placeholder="Full name" ngModel> <br/>
@@ -13,7 +21,7 @@
 
   <label for="repeatPassword">Confirm Password</label>
   <input type="password" name="repeatPassword" id="repeatPassword" placeholder="Confirm Password" ngModel> <br/>
-  
+
   <button type="submit">Register</button>
   <br/>
 </form>
