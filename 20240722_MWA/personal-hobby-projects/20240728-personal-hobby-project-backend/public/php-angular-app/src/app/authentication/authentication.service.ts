@@ -21,6 +21,10 @@ export class AuthenticationService {
     return localStorage.getItem(environment.accessToken) ?? '';
   }
 
+  removeToken() {
+    localStorage.removeItem(environment.accessToken);
+  }
+
   login(username: string, password: string): Observable<LoginResponse> {
     const loginUrl = `${environment.baseUrl}${environment.loginEndpoint}`;
 
