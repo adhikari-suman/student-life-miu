@@ -23,6 +23,7 @@ export const environment = Object.freeze({
   registerEndpoint: 'registration endpoint here',
   loginEndpoint: 'login endpoint here',
   getUserByIdEndpoint: _getUserByIdEndpoint,
+  animeEndpoint: '/anime',
   getAnimePaginatedEndpoint: _getAnimePaginatedEndpoint,
   animeByIdEndpoint: _animeByIdEndpoint,
   getAnimeCharactersByAnimeIdEndpoint: _getAnimeCharactersByAnimeIdEndpoint,
