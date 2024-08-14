@@ -18,6 +18,10 @@ const _animeCharacterByAnimeIdAndCharacterIdEndpoint = function (animeId: String
   return `replace with anime by id to fetch characters by id endpoint with anime id ${animeId} and characterId ${characterId}`;
 }
 
+const _bearerToken = function (token: string) {
+  return `Bearer ${token}`;
+}
+
 export const environment = Object.freeze({
   baseUrl: 'base url here',
   registerEndpoint: 'registration endpoint here',
@@ -28,4 +32,7 @@ export const environment = Object.freeze({
   animeByIdEndpoint: _animeByIdEndpoint,
   getAnimeCharactersByAnimeIdEndpoint: _getAnimeCharactersByAnimeIdEndpoint,
   animeCharacterByAnimeIdAndCharacterIdEndpoint: _animeCharacterByAnimeIdAndCharacterIdEndpoint,
+  accessToken: 'Access token string for local storage',
+  authorizationHeader: 'Authorization header',
+  bearerToken: _bearerToken,
 });

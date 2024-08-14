@@ -18,6 +18,9 @@ const _animeCharacterByAnimeIdAndCharacterIdEndpoint = function (animeId: String
   return `/anime/${animeId}/characters/${characterId}`;
 }
 
+const _bearerToken = function (token: string) {
+  return `Bearer ${token}`;
+}
 export const environment = Object.freeze({
   baseUrl: 'http://localhost:3000/api/v1',
   registerEndpoint: '/users',
@@ -28,4 +31,7 @@ export const environment = Object.freeze({
   animeByIdEndpoint: _animeByIdEndpoint,
   getAnimeCharactersByAnimeIdEndpoint: _getAnimeCharactersByAnimeIdEndpoint,
   animeCharacterByAnimeIdAndCharacterIdEndpoint: _animeCharacterByAnimeIdAndCharacterIdEndpoint,
+  accessToken: 'access-token',
+  authorizationHeader: 'Authorization',
+  bearerToken: _bearerToken,
 });
