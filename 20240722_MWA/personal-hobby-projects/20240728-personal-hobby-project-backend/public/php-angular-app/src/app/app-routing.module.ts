@@ -7,16 +7,17 @@ import {ErrorComponent} from "./core/error/error.component";
 import {LoginComponent} from "./authentication/login/login.component";
 import {RegisterComponent} from "./authentication/register/register.component";
 import {AnimeDetailComponent} from "./anime/anime-detail/anime-detail.component";
+import {HomeComponent} from "./home/home/home.component";
 
 const routes: Routes = [
   {
     path: '', redirectTo: 'home', pathMatch: 'full',
   },
   {
-    path: 'anime', redirectTo: 'home', pathMatch: 'full'
+    path: 'home', component: HomeComponent,
   },
   {
-    path: 'home', component: AnimeListComponent,
+    path: 'anime', component: AnimeListComponent,
   },
   {
     path: 'anime/add', component: AddAnimeComponent,
