@@ -18,7 +18,7 @@ const _animeCharacterByAnimeIdAndCharacterIdEndpoint = function (animeId: String
   return `/anime/${animeId}/characters/${characterId}`;
 }
 
-export const environment = {
+export const environment = Object.freeze({
   baseUrl: 'http://localhost:3000/api/v1',
   registerEndpoint: '/users',
   loginEndpoint: '/users/authenticate',
@@ -27,4 +27,4 @@ export const environment = {
   animeByIdEndpoint: _animeByIdEndpoint,
   getAnimeCharactersByAnimeIdEndpoint: _getAnimeCharactersByAnimeIdEndpoint,
   animeCharacterByAnimeIdAndCharacterIdEndpoint: _animeCharacterByAnimeIdAndCharacterIdEndpoint,
-};
+});
