@@ -25,6 +25,12 @@ export class AuthenticationService {
     localStorage.removeItem(environment.accessToken);
   }
 
+  get isUserLoggedIn(): boolean {
+    const token = localStorage.getItem(environment.accessToken);
+
+    return token !== null && token.length !== 0;
+  }
+
   login(username: string, password: string): Observable<LoginResponse> {
     const loginUrl = `${environment.baseUrl}${environment.loginEndpoint}`;
 
