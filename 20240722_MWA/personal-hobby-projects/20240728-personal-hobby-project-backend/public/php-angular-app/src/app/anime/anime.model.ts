@@ -1,4 +1,5 @@
 import {Character} from "./character.model";
+import {FormArray, FormGroup} from "@angular/forms";
 
 export class Anime {
   public _id?: string;  // Optional property
@@ -19,5 +20,33 @@ export class Anime {
     this.studio = studio;
     this.characters = characters;
     this.releaseDate = releaseDate;
+  }
+
+  fillFormData(updateAnimeForm: FormGroup) {
+    this._id = updateAnimeForm.value.id;
+    this.name = updateAnimeForm.value.name;
+    this.studio = updateAnimeForm.value.studio;
+    this.releaseDate = updateAnimeForm.value.releaseDate;
+
+    const characters = new Array<Character>();
+
+    const charactersFormArray = updateAnimeForm.get("characters") as FormArray;
+
+    charactersFormArray.controls.forEach(control => {
+      const character = new Character('', []);
+
+      if (control.value.id) {
+        character._id = control.value.id;
+      }
+      character.name = control.value.name;
+      character.characteristics = [];
+
+      characters.push(character);
+    });
+
+    this.characters = characters;
+
+
+    console.log(characters);
   }
 }
