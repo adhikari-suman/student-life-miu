@@ -11,8 +11,8 @@
   </ul>
 
   <div>
-    <button routerLink="/anime/:id/edit">Edit</button>
-    <button (click)="deletePressed(animeDetail._id??'')">Delete</button>
+    <button routerLink="/anime/{{animeDetail._id}}/edit" *ngIf="isLoggedIn">Edit</button>
+    <button (click)="deletePressed(animeDetail._id??'')" *ngIf="isLoggedIn">Delete</button>
   </div>
 </div>
 <div *ngIf="!animeDetail">
