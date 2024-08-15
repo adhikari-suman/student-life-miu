@@ -1,1 +1,5 @@
-<p>anime-list works!</p>
+<ol>
+  <li *ngFor="let myAnime of anime">
+    <a routerLink="/anime/{{myAnime._id??''}}">{{ myAnime.name }}</a>
+  </li>
+</ol>
