@@ -1,0 +1,11 @@
+.character-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.character-title button {
+  height: auto;
+  flex-shrink: 0;
+  /*margin: 0 0 auto;*/
+}
