@@ -6,7 +6,6 @@ import {UpdateAnimeComponent} from "./anime/update-anime/update-anime.component"
 import {ErrorComponent} from "./core/error/error.component";
 import {AnimeDetailComponent} from "./anime/anime-detail/anime-detail.component";
 import {HomeComponent} from "./home/home/home.component";
-import {AuthenticationModule} from "./authentication/authentication.module";
 import {RegisterComponent} from "./authentication/register/register.component";
 
 const routes: Routes = [
@@ -39,7 +38,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    AuthenticationModule,
   ],
   exports: [RouterModule]
 })
