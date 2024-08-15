@@ -1,1 +1,20 @@
-<p>anime-detail works!</p>
+<div *ngIf="animeDetail">
+  <h1>{{ animeDetail.name }}</h1>
+  <p>Released on: {{ animeDetail.releaseDate | date }}</p>
+  <p>Studio: {{ animeDetail.studio }}</p>
+
+  <h3>Characters:</h3>
+  <ul>
+    <li *ngFor="let character of animeDetail.characters">
+      <strong>{{ character.name }}</strong>: {{ character.characteristics.join(', ') }}
+    </li>
+  </ul>
+
+  <div>
+    <button routerLink="/anime/:id/edit">Edit</button>
+    <button (click)="deletePressed(animeDetail._id??'')">Delete</button>
+  </div>
+</div>
+<div *ngIf="!animeDetail">
+  <p>Loading...</p>
+</div>
