@@ -39,7 +39,7 @@ export class Anime {
         character._id = control.value.id;
       }
       character.name = control.value.name;
-      character.characteristics = [];
+      character.characteristics = control.value.characteristics.split(',').map((item: string) => item.trim());
 
       characters.push(character);
     });
