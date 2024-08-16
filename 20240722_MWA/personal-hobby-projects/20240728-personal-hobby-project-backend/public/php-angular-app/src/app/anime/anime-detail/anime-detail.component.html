@@ -1,6 +1,6 @@
 <div *ngIf="animeDetail">
   <h1>{{ animeDetail.name }}</h1>
-  <p>Released on: {{ animeDetail.releaseDate | date }}</p>
+  <p>Released on: {{ animeDetail.releaseDate | date: 'MMMM dd, yyyy': 'UTC' : 'en-US' }}</p>
   <p>Studio: {{ animeDetail.studio }}</p>
 
   <h3>Characters:</h3>
