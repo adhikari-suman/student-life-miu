@@ -8,6 +8,8 @@ import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authenticationInterceptor} from "./authentication/authentication.interceptor";
 import {CoreModule} from "./core/core.module";
 import {AnimeModule} from "./anime/anime.module";
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -19,12 +21,13 @@ import {AnimeModule} from "./anime/anime.module";
     AuthenticationModule,
     CoreModule,
     AnimeModule,
+    BrowserAnimationsModule,
   ],
   providers: [provideHttpClient(
     withInterceptors([
       authenticationInterceptor
     ])
-  )],
+  ), provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule {

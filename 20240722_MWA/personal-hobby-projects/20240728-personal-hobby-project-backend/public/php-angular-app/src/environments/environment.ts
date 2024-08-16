@@ -35,4 +35,6 @@ export const environment = Object.freeze({
   accessToken: 'Access token string for local storage',
   authorizationHeader: 'Authorization header',
   bearerToken: _bearerToken,
+  userRegisteredSuccessfullyMessage: 'User registered successfully. Please login now.',
+  userRegistrationFailed: 'User registration failed.',
 });

@@ -6,9 +6,9 @@
   <br/>
   <br/>
   <div>
-    <button type="button" (click)="goToPreviousPage()" [disabled]="!pagination.hasPrevious">Previous</button>
+    <button mat-button type="button" (click)="goToPreviousPage()" [disabled]="!pagination.hasPrevious">Previous</button>
     &nbsp;
-    <button type="button" (click)="goToNextPage()" [disabled]="!pagination.hasNext">Next</button>
+    <button mat-button type="button" (click)="goToNextPage()" [disabled]="!pagination.hasNext">Next</button>
 
   </div>
 </ol>

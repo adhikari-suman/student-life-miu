@@ -34,4 +34,6 @@ export const environment = Object.freeze({
   accessToken: 'access-token',
   authorizationHeader: 'Authorization',
   bearerToken: _bearerToken,
+  userRegisteredSuccessfullyMessage: 'User registered successfully. Please login now.',
+  userRegistrationFailed: 'User registration failed.',
 });

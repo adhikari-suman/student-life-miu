@@ -17,7 +17,7 @@
 
       <div class="character-title">
         <h3>Character: {{ character.value.name }}</h3>
-        <button type="button" (click)="deleteCharacter(characterIndex)">Delete</button>
+        <button mat-button type="button" (click)="deleteCharacter(characterIndex)">Delete</button>
       </div>
 
 
@@ -37,9 +37,9 @@
 
     </div>
 
-    <button type="button" (click)="addCharacter()">Add Character</button>
+    <button mat-button type="button" (click)="addCharacter()">Add Character</button>
 
   </div>
 
-  <button type="submit">Add</button>
+  <button mat-button type="submit">Add</button>
 </form>

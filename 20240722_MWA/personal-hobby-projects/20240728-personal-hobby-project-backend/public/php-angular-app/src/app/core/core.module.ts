@@ -7,6 +7,7 @@ import {ErrorComponent} from './error/error.component';
 import {RouterLink} from "@angular/router";
 import {AuthenticationModule} from "../authentication/authentication.module";
 import {NotFoundComponent} from './not-found/not-found.component';
+import {MatAnchor, MatButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -21,6 +22,8 @@ import {NotFoundComponent} from './not-found/not-found.component';
     CommonModule,
     RouterLink,
     AuthenticationModule,
+    MatAnchor,
+    MatButton,
   ],
   exports: [
     HeaderComponent,

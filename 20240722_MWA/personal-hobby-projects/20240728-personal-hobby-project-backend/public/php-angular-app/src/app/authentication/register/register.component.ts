@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {RegisterRequest} from "../models/register-request.model";
 import {AuthenticationService} from "../authentication.service";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-register',
@@ -30,18 +31,18 @@ export class RegisterComponent {
 
     this._authenticationService.register(registerRequest).subscribe({
         next: () => {
-          this.successMessage = 'User registered successfully';
+          this.successMessage = environment.userRegisteredSuccessfullyMessage;
           this.displaySuccessMessage = true;
           this.displayErrorMessage = false;
         },
         error: error => {
-          this.errorMessage = 'User registration failed.';
+          this.errorMessage = environment.userRegistrationFailed;
           this.displaySuccessMessage = false;
           this.displayErrorMessage = true;
           console.log(error);
         },
         complete: () => {
-          this._router.navigate(['login']);
+          registrationForm.reset();
         }
       }
     );

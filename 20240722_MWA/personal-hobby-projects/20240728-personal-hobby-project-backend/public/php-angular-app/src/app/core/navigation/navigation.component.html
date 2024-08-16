@@ -1,14 +1,15 @@
-<nav>
+<div class="nav-bar">
+  <nav class="status-bar">
   <span>
-    <button routerLink="/home">Home</button>
-    <button routerLink="/anime">Anime</button>
-    <button routerLink="/anime/add" *ngIf="isLoggedIn">Add Anime</button>
-    <button routerLink="/register" *ngIf="!isLoggedIn">Register</button>
-    <!--    <button routerLink="/profile" *ngIf="isLoggedIn">Profile</button>-->
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/anime">Anime</a>
+    <a mat-button routerLink="/anime/add" *ngIf="isLoggedIn">Add Anime</a>
+    <a mat-button routerLink="/register" *ngIf="!isLoggedIn">Register</a>
   </span>
 
-  <span>
-    <button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+    <span>
+    <button mat-button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
     <app-login *ngIf="!isLoggedIn"/>
   </span>
-</nav>
+  </nav>
+</div>

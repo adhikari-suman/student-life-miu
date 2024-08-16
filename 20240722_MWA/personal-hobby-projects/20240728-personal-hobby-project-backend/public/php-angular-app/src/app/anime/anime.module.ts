@@ -6,6 +6,7 @@ import {AddAnimeComponent} from './add-anime/add-anime.component';
 import {UpdateAnimeComponent} from './update-anime/update-anime.component';
 import {RouterLink} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     RouterLink,
     FormsModule,
     ReactiveFormsModule,
+    MatButton,
   ],
   exports: [
     AnimeListComponent,
