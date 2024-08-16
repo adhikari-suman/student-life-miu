@@ -1,1 +1,45 @@
-<p>add-anime works!</p>
+<h1>Add Anime Details</h1>
+
+<form [formGroup]="updateAnimeForm" (ngSubmit)="addAnime(updateAnimeForm)">
+
+  <label for="anime_name">Name</label>
+  <input type="text" name="anime_name" id="anime_name" placeholder="Name" formControlName="name"/><br/>
+
+  <label for="anime_studio">Production Studio</label>
+  <input type="text" name="anime_studio" id="anime_studio" placeholder="Studio" formControlName="studio"/><br/>
+
+  <label for="anime_release_date">Release Date</label>
+  <input type="date" name="anime_release_date" id="anime_release_date" placeholder="Release Date"
+         formControlName="releaseDate"/><br/>
+
+  <div formArrayName="characters">
+    <div *ngFor="let character of characters.controls; let characterIndex = index" [formGroupName]="characterIndex">
+
+      <div class="character-title">
+        <h3>Character: {{ character.value.name }}</h3>
+        <button type="button" (click)="deleteCharacter(characterIndex)">Delete</button>
+      </div>
+
+
+      <div>
+        <label for="character_{{characterIndex}}_name">Character Name:</label>
+        <input type="text"
+               id="character_{{characterIndex}}_name"
+               placeholder="Character name"
+               formControlName="name"/><br/>
+
+        <label for="character_{{characterIndex}}_characteristics">Characteristics</label>
+        <textarea
+          id="character_{{characterIndex}}_characteristics"
+          placeholder="Add characteristics (comma separated)"
+          formControlName="characteristics"></textarea><br/>
+      </div>
+
+    </div>
+
+    <button type="button" (click)="addCharacter()">Add Character</button>
+
+  </div>
+
+  <button type="submit">Add</button>
+</form>

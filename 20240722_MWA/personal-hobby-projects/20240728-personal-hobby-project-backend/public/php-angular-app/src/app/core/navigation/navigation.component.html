@@ -2,8 +2,9 @@
   <span>
     <button routerLink="/home">Home</button>
     <button routerLink="/anime">Anime</button>
+    <button routerLink="/anime/add" *ngIf="isLoggedIn">Add Anime</button>
     <button routerLink="/register" *ngIf="!isLoggedIn">Register</button>
-    <button routerLink="/profile" *ngIf="isLoggedIn">Profile</button>
+    <!--    <button routerLink="/profile" *ngIf="isLoggedIn">Profile</button>-->
   </span>
 
   <span>

@@ -22,15 +22,17 @@ export class Anime {
     this.releaseDate = releaseDate;
   }
 
-  fillFormData(updateAnimeForm: FormGroup) {
-    this._id = updateAnimeForm.value.id;
-    this.name = updateAnimeForm.value.name;
-    this.studio = updateAnimeForm.value.studio;
-    this.releaseDate = updateAnimeForm.value.releaseDate;
+  fillFormData(animeForm: FormGroup) {
+    if (animeForm.value.id !== undefined && animeForm.value.id !== '') {
+      this._id = animeForm.value.id;
+    }
+    this.name = animeForm.value.name;
+    this.studio = animeForm.value.studio;
+    this.releaseDate = animeForm.value.releaseDate;
 
     const characters = new Array<Character>();
 
-    const charactersFormArray = updateAnimeForm.get("characters") as FormArray;
+    const charactersFormArray = animeForm.get("characters") as FormArray;
 
     charactersFormArray.controls.forEach(control => {
       const character = new Character('', []);

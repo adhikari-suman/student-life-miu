@@ -25,10 +25,10 @@ export class AnimeService {
     return this.http.get<Anime>(url);
   }
 
-  addOne(anime: Anime): Observable<void> {
+  addOne(anime: Anime): Observable<Anime> {
     const url = `${environment.baseUrl}${environment.animeEndpoint}`;
 
-    return this.http.post<void>(url, anime);
+    return this.http.post<Anime>(url, anime);
   }
 
   updateOne(id: string, anime: any): Observable<void> {
