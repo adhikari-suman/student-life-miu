@@ -4,9 +4,13 @@
   "description": "REST API for my anime list",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "npm run startBackend | npm run startFrontend",
     "dev": "nodemon --inspect",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestartBackend": "npm install",
+    "prestartFrontend": "cd public/php-angular-app && npm install",
+    "startBackend": "node app.js",
+    "startFrontend": "cd public/php-angular-app && npm run start"
   },
   "keywords": [
     "anime",
