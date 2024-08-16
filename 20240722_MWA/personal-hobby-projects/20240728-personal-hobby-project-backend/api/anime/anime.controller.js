@@ -29,6 +29,14 @@ const _setResponseToAnime = (response, anime) => {
     response.data = anime;
 };
 
+const _setResponseToAnimeWithPaginationData = (response, anime, paginationData) => {
+    response.status = parseInt(process.env.HTTP_STATUS_OK);
+    response.data = {
+        anime: anime,
+        pagination: paginationData,
+    };
+};
+
 const findOne = function (req, res) {
     const animeId = req.params.id;
 
@@ -50,6 +58,21 @@ const findOne = function (req, res) {
             .finally(() => sendResponse(res, response));
     }
 };
+
+const _setPaginationData = function (paginationData, page, size, count) {
+    return new Promise((resolve) => {
+        const offset = (page - 1) * size;
+
+        paginationData.page = page;
+        paginationData.size = size;
+        paginationData.total = count;
+        paginationData.hasNext = (offset + size) < count;
+        paginationData.hasPrevious = page > 1;
+
+        resolve(paginationData);
+    });
+}
+
 
 const findAllWithPagination = function (req, res) {
     let page = parseInt(process.env.QUERY_PAGE_DEFAULT);
@@ -76,11 +99,24 @@ const findAllWithPagination = function (req, res) {
         sendResponse(res, response);
     } else {
         const offset = (page - 1) * size;
+        const paginationData = {
+            page: page,
+            size: size,
+            total: 0,
+            hasNext: false,
+            hasPrevious: page > 1,
+        };
 
-        AnimeModel.find().skip(offset).limit(size).exec()
-            .then(anime => _setResponseToAnime(response, anime))
+        AnimeModel.find().countDocuments().exec()
+            .then(count => _setPaginationData(paginationData, page, size, count))
+            .then(() => AnimeModel.find().skip(offset).limit(size).exec())
+            .then(anime => _setResponseToAnimeWithPaginationData(response, anime, paginationData))
             .catch(error => _setResponseToError(response, error))
-            .finally(() => sendResponse(res, response));
+            .finally(() => {
+
+                console.log(paginationData);
+                sendResponse(res, response);
+            });
     }
 };
 
