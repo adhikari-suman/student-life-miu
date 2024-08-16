@@ -41,10 +41,12 @@ export class UpdateAnimeComponent implements OnInit {
       const characterFormArray: FormArray = this._formBuilder.array([]);
 
       for (const character of anime.characters) {
+        // const characteristicsFormArray = this._formBuilder.array(character.characteristics);
+
         const characterGroup = this._formBuilder.group({
           'id': character._id,
           'name': character.name,
-          // TODO: characteristics as well
+          'characteristics': character.characteristics.join(', '),
         });
 
         characterFormArray.push(characterGroup);
@@ -56,11 +58,13 @@ export class UpdateAnimeComponent implements OnInit {
           id: anime._id,
           name: anime.name,
           studio: anime.studio,
-          releaseDate: formatDate(anime.releaseDate, 'yyyy-MM-dd', 'en'),
+          releaseDate: formatDate(anime.releaseDate, 'yyyy-MM-dd', 'en-US', 'UTC'),
         }
       );
 
       this.updateAnimeForm.setControl('characters', characterFormArray);
+
+      console.log(this.updateAnimeForm);
     })
   }
 
@@ -80,7 +84,8 @@ export class UpdateAnimeComponent implements OnInit {
     const characterGroup = this._formBuilder.group({
       'id': null,
       'name': null,
-      'characteristics': this._formBuilder.array([]),
+      // 'characteristics': this._formBuilder.array([]),
+      'characteristics': null,
     });
 
     this.characters.push(characterGroup);
@@ -89,4 +94,12 @@ export class UpdateAnimeComponent implements OnInit {
   deleteCharacter(characterIndex: number) {
     this.characters.removeAt(characterIndex);
   }
+
+  // getCharacteristicsFormArray(character: AbstractControl): FormArray {
+  //
+  //   console.log((character as FormGroup).get('characteristics') as FormArray);
+  //   return (character as FormGroup).get('characteristics') as FormArray;
+  // }
+
+  protected readonly console = console;
 }

@@ -22,17 +22,25 @@
       </div>
 
 
-      <label for="character_{{characterIndex}}_name">Character Name:</label>
-      <input type="text"
-             id="character_{{characterIndex}}_name"
-             placeholder="Character name"
-             formControlName="name"/><br/>
+      <div>
+        <label for="character_{{characterIndex}}_name">Character Name:</label>
+        <input type="text"
+               id="character_{{characterIndex}}_name"
+               placeholder="Character name"
+               formControlName="name"/><br/>
+
+        <label for="character_{{characterIndex}}_characteristics">Characteristics</label>
+        <textarea
+          id="character_{{characterIndex}}_characteristics"
+          placeholder="Add characteristics (comma separated)"
+          formControlName="characteristics"></textarea><br/>
+      </div>
+
     </div>
 
     <button type="button" (click)="addCharacter()">Add Character</button>
 
   </div>
-
 
   <button type="submit">Update</button>
 </form>
