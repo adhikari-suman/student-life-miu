@@ -1,0 +1,1 @@
+console.log("Inside the talk folder index.js");

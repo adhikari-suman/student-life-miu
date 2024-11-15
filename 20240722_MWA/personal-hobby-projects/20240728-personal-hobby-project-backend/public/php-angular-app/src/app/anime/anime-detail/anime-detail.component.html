@@ -1,0 +1,20 @@
+<div *ngIf="animeDetail">
+  <h1>{{ animeDetail.name }}</h1>
+  <p>Released on: {{ animeDetail.releaseDate | date: 'MMMM dd, yyyy': 'UTC' : 'en-US' }}</p>
+  <p>Studio: {{ animeDetail.studio }}</p>
+
+  <h3>Characters:</h3>
+  <ul>
+    <li *ngFor="let character of animeDetail.characters">
+      <strong>{{ character.name }}</strong>: {{ character.characteristics.join(', ') }}
+    </li>
+  </ul>
+
+  <div>
+    <button mat-button routerLink="/anime/{{animeDetail._id}}/edit" *ngIf="isLoggedIn">Edit</button>
+    <button mat-button (click)="deletePressed(animeDetail._id??'')" *ngIf="isLoggedIn">Delete</button>
+  </div>
+</div>
+<div *ngIf="!animeDetail">
+  <p>Loading...</p>
+</div>

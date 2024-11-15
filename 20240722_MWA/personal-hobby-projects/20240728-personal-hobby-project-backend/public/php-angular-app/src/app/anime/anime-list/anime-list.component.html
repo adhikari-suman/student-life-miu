@@ -1,0 +1,14 @@
+<ol start="{{(pagination.page - 1) * pagination.size + 1}}">
+  <li *ngFor="let myAnime of anime">
+    <a routerLink="/anime/{{myAnime._id??''}}">{{ myAnime.name }}</a>
+  </li>
+
+  <br/>
+  <br/>
+  <div>
+    <button mat-button type="button" (click)="goToPreviousPage()" [disabled]="!pagination.hasPrevious">Previous</button>
+    &nbsp;
+    <button mat-button type="button" (click)="goToNextPage()" [disabled]="!pagination.hasNext">Next</button>
+
+  </div>
+</ol>

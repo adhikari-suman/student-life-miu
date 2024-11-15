@@ -1,0 +1,9 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar {
+  padding: 15px 10px;
+  background: #ffd9e1;
+}

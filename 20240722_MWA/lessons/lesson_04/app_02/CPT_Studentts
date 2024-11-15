@@ -1,0 +1,10 @@
+import { Token } from "./MyDecorator.js";
+import { Student } from "./Student.js";
+
+@Token({
+    course: "EA",
+    canProgram: false,
+})
+export class CPT_Student extends Student {
+
+}

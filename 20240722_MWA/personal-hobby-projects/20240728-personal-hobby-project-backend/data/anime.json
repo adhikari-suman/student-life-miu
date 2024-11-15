@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Naruto",
+    "releaseDate": "2002-10-03",
+    "studio": "Pierrot",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d3b",
+        "name": "Naruto Uzumaki",
+        "characteristics": ["Determined", "Energetic", "Loyal"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d3c",
+        "name": "Sasuke Uchiha",
+        "characteristics": ["Brooding", "Talented", "Vengeful"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d3d",
+        "name": "Sakura Haruno",
+        "characteristics": ["Intelligent", "Strong-willed", "Compassionate"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d3e",
+        "name": "Kakashi Hatake",
+        "characteristics": ["Calm", "Wise", "Skilled"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d3f",
+        "name": "Gaara",
+        "characteristics": ["Stoic", "Powerful", "Reserved"]
+      }
+    ]
+  },
+  {
+    "name": "One Piece",
+    "releaseDate": "1999-10-20",
+    "studio": "Toei Animation",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d40",
+        "name": "Monkey D. Luffy",
+        "characteristics": ["Brave", "Energetic", "Optimistic"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d41",
+        "name": "Roronoa Zoro",
+        "characteristics": ["Loyal", "Strong", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d42",
+        "name": "Nami",
+        "characteristics": ["Smart", "Resourceful", "Caring"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d43",
+        "name": "Sanji",
+        "characteristics": ["Chivalrous", "Passionate", "Skilled"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d44",
+        "name": "Usopp",
+        "characteristics": ["Creative", "Courageous", "Funny"]
+      }
+    ]
+  },
+  {
+    "name": "Attack on Titan",
+    "releaseDate": "2013-04-07",
+    "studio": "Wit Studio",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d45",
+        "name": "Eren Yeager",
+        "characteristics": ["Determined", "Impulsive", "Brave"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d46",
+        "name": "Mikasa Ackerman",
+        "characteristics": ["Strong", "Loyal", "Protective"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d47",
+        "name": "Armin Arlert",
+        "characteristics": ["Intelligent", "Strategic", "Caring"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d48",
+        "name": "Levi Ackerman",
+        "characteristics": ["Skilled", "Stoic", "Resilient"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d49",
+        "name": "Erwin Smith",
+        "characteristics": ["Charismatic", "Strategic", "Determined"]
+      }
+    ]
+  },
+  {
+    "name": "My Hero Academia",
+    "releaseDate": "2016-04-03",
+    "studio": "Bones",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4a",
+        "name": "Izuku Midoriya",
+        "characteristics": ["Determined", "Kind", "Brave"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4b",
+        "name": "Katsuki Bakugo",
+        "characteristics": ["Aggressive", "Talented", "Proud"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4c",
+        "name": "Ochaco Uraraka",
+        "characteristics": ["Optimistic", "Kind", "Cheerful"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4d",
+        "name": "Tenya Iida",
+        "characteristics": ["Disciplined", "Responsible", "Loyal"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4e",
+        "name": "Shoto Todoroki",
+        "characteristics": ["Calm", "Powerful", "Reserved"]
+      }
+    ]
+  },
+  {
+    "name": "Fullmetal Alchemist: Brotherhood",
+    "releaseDate": "2009-04-05",
+    "studio": "Bones",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d4f",
+        "name": "Edward Elric",
+        "characteristics": ["Determined", "Brave", "Loyal"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d50",
+        "name": "Alphonse Elric",
+        "characteristics": ["Kind", "Protective", "Strong"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d51",
+        "name": "Roy Mustang",
+        "characteristics": ["Charismatic", "Skilled", "Ambitious"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d52",
+        "name": "Winry Rockbell",
+        "characteristics": ["Caring", "Talented", "Supportive"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d53",
+        "name": "Riza Hawkeye",
+        "characteristics": ["Disciplined", "Loyal", "Skilled"]
+      }
+    ]
+  },
+  {
+    "name": "Dragon Ball Z",
+    "releaseDate": "1989-04-26",
+    "studio": "Toei Animation",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d54",
+        "name": "Goku",
+        "characteristics": ["Brave", "Strong", "Cheerful"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d55",
+        "name": "Vegeta",
+        "characteristics": ["Proud", "Ambitious", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d56",
+        "name": "Gohan",
+        "characteristics": ["Kind", "Intelligent", "Strong"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d57",
+        "name": "Piccolo",
+        "characteristics": ["Wise", "Powerful", "Calm"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d58",
+        "name": "Bulma",
+        "characteristics": ["Smart", "Resourceful", "Caring"]
+      }
+    ]
+  },
+  {
+    "name": "Death Note",
+    "releaseDate": "2006-10-04",
+    "studio": "Madhouse",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d59",
+        "name": "Light Yagami",
+        "characteristics": ["Intelligent", "Charismatic", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5a",
+        "name": "L",
+        "characteristics": ["Brilliant", "Eccentric", "Mysterious"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5b",
+        "name": "Misa Amane",
+        "characteristics": ["Loyal", "Cheerful", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5c",
+        "name": "Ryuk",
+        "characteristics": ["Mischievous", "Detached", "Curious"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5d",
+        "name": "Near",
+        "characteristics": ["Calm", "Intelligent", "Strategic"]
+      }
+    ]
+  },
+  {
+    "name": "Sword Art Online",
+    "releaseDate": "2012-07-08",
+    "studio": "A-1 Pictures",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5e",
+        "name": "Kirito",
+        "characteristics": ["Skilled", "Brave", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d5f",
+        "name": "Asuna",
+        "characteristics": ["Strong", "Caring", "Loyal"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d60",
+        "name": "Leafa",
+        "characteristics": ["Kind", "Supportive", "Cheerful"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d61",
+        "name": "Sinon",
+        "characteristics": ["Skilled", "Calm", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d62",
+        "name": "Klein",
+        "characteristics": ["Loyal", "Brave", "Supportive"]
+      }
+    ]
+  },
+  {
+    "name": "Demon Slayer",
+    "releaseDate": "2019-04-06",
+    "studio": "ufotable",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d63",
+        "name": "Tanjiro Kamado",
+        "characteristics": ["Kind", "Brave", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d64",
+        "name": "Nezuko Kamado",
+        "characteristics": ["Loyal", "Strong", "Protective"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d65",
+        "name": "Zenitsu Agatsuma",
+        "characteristics": ["Timid", "Skilled", "Brave"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d66",
+        "name": "Inosuke Hashibira",
+        "characteristics": ["Aggressive", "Strong", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d67",
+        "name": "Kyojuro Rengoku",
+        "characteristics": ["Charismatic", "Skilled", "Brave"]
+      }
+    ]
+  },
+  {
+    "name": "Tokyo Ghoul",
+    "releaseDate": "2014-07-04",
+    "studio": "Pierrot",
+    "characters": [
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d68",
+        "name": "Ken Kaneki",
+        "characteristics": ["Kind", "Brave", "Tragic"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d69",
+        "name": "Touka Kirishima",
+        "characteristics": ["Strong", "Protective", "Determined"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d6a",
+        "name": "Yoshimura",
+        "characteristics": ["Wise", "Caring", "Supportive"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d6b",
+        "name": "Nishiki Nishio",
+        "characteristics": ["Proud", "Loyal", "Strong"]
+      },
+      {
+        "_id": "64c63a5e8c1f4a8b1a9f6d6c",
+        "name": "Hinami Fueguchi",
+        "characteristics": ["Innocent", "Kind", "Tragic"]
+      }
+    ]
+  }
+]

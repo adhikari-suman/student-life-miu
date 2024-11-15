@@ -1,0 +1,42 @@
+1 + 2 = {{ 1 + 2 }}<br />
+
+{{ "Hello" + "World!" }}<br />
+
+<ul>
+  <li *ngFor="let name of people">{{ name }}</li>
+</ul>
+<br />
+
+{{ title }} <button (click)="clickButtonPressed()">Click</button>
+
+<br />
+<select>
+  <option *ngFor="let student of students">{{ student.name }}</option>
+</select>
+<br />
+<br />
+
+{{ 123 | currency}}<br/>
+{{ 123 | currency:"" }}<br/>
+<br/>
+
+{{today | date}}<br/>
+{{today | date: "long"}}<br/>
+{{today | date: "medium"}}<br/>
+{{today | date: "short"}}<br/>
+{{today | date: "MM-dd-yyyy"}}<br/>
+<br/>
+
+{{students | json}}<br/>
+
+<br/>
+
+{{"Maharishi International University" | lowercase}}<br/>
+{{"Maharishi International University" | uppercase}}<br/>
+<br/>
+<br/>
+
+{{12345.6789992340}}<br/>
+{{12345.6789992340 | number: "1.2-5"}}<br/>
+{{12345.6789992340 | number: "4.0-2"}}<br/>
+{{12345.6789992340 | number: "1.2"}}<br/>

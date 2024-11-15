@@ -1,0 +1,28 @@
+<p>Template with 2 way binding works</p>
+<form #registrationForm="ngForm" (ngSubmit)="register(registrationForm)" > 
+    <div> 
+      <label> 
+        Name: 
+        <input name="name" id="name" placeholder="Your name" [(ngModel)]="user.name"> 
+      </label> 
+    </div> 
+    <div> 
+      <label> 
+        Username: 
+        <input name="username" id="username" placeholder="Username" [(ngModel)]="user.username"> 
+      </label> 
+    </div> 
+    <div> 
+      <label> 
+        Password: 
+        <input type="password" name="password" id="password" placeholder="Password" [(ngModel)]="user.password"> 
+      </label> 
+    </div> 
+    <div> 
+      <label> 
+        Repeat Password: 
+        <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Password" [(ngModel)]="user.repeatPassword"> 
+      </label> 
+    </div> 
+    <button type="submit">Register</button> 
+  </form> 

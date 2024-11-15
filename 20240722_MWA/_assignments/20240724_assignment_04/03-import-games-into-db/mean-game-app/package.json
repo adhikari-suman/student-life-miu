@@ -1,0 +1,28 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "Express app for assignment 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "app",
+    "express",
+    "assignemnt_02",
+    "MWA",
+    "Najeeb Najeeb",
+    "Suman",
+    "Adhikari"
+  ],
+  "author": "Suman Adhikari",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^4.16.0"
+  }
+}
