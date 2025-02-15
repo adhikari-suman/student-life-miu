@@ -1,11 +1,12 @@
-@import "../../../../_scss/_variables.scss";
+@use "../../../../_scss/_variables.scss" as *;
 
 .user-profile__content {
   background: $card-light;
   border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 5px 5px 15px 0 lighten($text-dark, 10%);
+  box-shadow: 5px 5px 15px 0 $text-dark;
 }
+
 
 .user-profile__image {
   width: 100%;
