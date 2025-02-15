@@ -1,0 +1,57 @@
+@import "../../../../_scss/_variables.scss";
+
+.user-profile__content {
+  background: $card-light;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px 0 lighten($text-dark, 10%);
+}
+
+.user-profile__image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  min-height: max(18.75rem, 300px);
+}
+
+.user-profile__name {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.user-profile__details-section {
+  display: block;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: $card-dark;
+  border-radius: 0.5rem;
+}
+
+.user-profile__list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.user-profile__list-item {
+  display: inline-block;
+  margin: 0.25rem;
+}
+
+.user-profile__section-title {
+  font-weight: 500;
+  color: $text-light;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.user-profile__list-item {
+  padding: 0.3rem;
+  color: $text-dark;
+  background: $card-light;
+  border-radius: 0.5rem;
+}

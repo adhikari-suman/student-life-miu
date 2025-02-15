@@ -1,1 +1,16 @@
-<p>home works!</p>
+<div [ngSwitch]="componentState.state" class="app-home">
+  <ng-container *ngSwitchCase="AppState.FAILED">
+    <div>
+      <p>Failed to load.</p>
+      <button type="button" (click)="fetchUserDetails()">Reload</button>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="AppState.SUCCESS">
+    <app-user-details [userDetails]="componentState.response?.userDetails!" />
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <app-circular-loader />
+  </ng-container>
+</div>
+
+

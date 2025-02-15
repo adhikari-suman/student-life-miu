@@ -1,4 +1,11 @@
-<main>
-  <h1><u>{{title}}</u></h1>
-  <router-outlet />
-</main>
+<div class="content">
+  <header>
+    <h1><u>{{ title }}</u></h1>
+  </header>
+  <main>
+    <router-outlet/>
+  </main>
+  <footer>
+    <p>Copyright © 2025 - {{ currentYear }} Suman Adhikari. All rights reserved.</p>
+  </footer>
+</div>

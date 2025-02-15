@@ -10,4 +10,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'Assignment #1 Task #3';
+  protected readonly currentYear = new Date().getFullYear();
 }
