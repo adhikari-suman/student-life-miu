@@ -1,10 +1,24 @@
 @use "../../../../_scss/_variables.scss" as *;
 
+:host {
+  @media (min-width: $medium) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
 .user-profile__content {
   background: $card-light;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 5px 5px 15px 0 $text-dark;
+
+  @media (min-width: $medium) {
+    max-width: 600px;
+  }
 }
 
 
