@@ -11,6 +11,11 @@ public class Product {
     private Double    unitPrice;
 
     public Product() {
+        this(null, null, null, null);
+    }
+
+    public Product(String name, LocalDate dateSupplied, Integer quantityInStock, Double unitPrice) {
+        this(null, name, dateSupplied, quantityInStock, unitPrice);
     }
 
     public Product(Long productId, String name, LocalDate dateSupplied, Integer quantityInStock, Double unitPrice) {
