@@ -73,7 +73,7 @@ public class ProductMgmtApp  {
 
         // 2. print the json
         System.out.println("Printed in XML format");
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private  static void printSeparator(){
