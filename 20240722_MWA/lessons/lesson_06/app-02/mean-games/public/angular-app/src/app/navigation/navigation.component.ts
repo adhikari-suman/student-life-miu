@@ -22,4 +22,12 @@ export class NavigationComponent {
     console.log("Go to games");
     this._router.navigate(["games"]);
   }
+  goToLoginPage() {
+    console.log("Go to Login");  // template with two way binding
+    this._router.navigate(["login"]);
+  }
+  goToRegisterPage() {
+    console.log("Go to Register");// Reactive form
+    this._router.navigate(["register"]);
+  }
 }

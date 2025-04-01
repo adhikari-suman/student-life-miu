@@ -33,13 +33,12 @@ export class ReactiveComponent implements OnInit {
   register() { 
     console.log("register clicked");
     console.log(this.registrationForm.value);
-    
+
   }
 
   // using form as input
   register1(form:FormGroup) { 
     console.log("register clicked");
     console.log(this.registrationForm.value);
-    
   }
 }
