@@ -1,0 +1,6 @@
+BubbleSort
+SelectionSort
+InsertionSort
+MergeSort
+MergeSortPlus
+BSTSort
