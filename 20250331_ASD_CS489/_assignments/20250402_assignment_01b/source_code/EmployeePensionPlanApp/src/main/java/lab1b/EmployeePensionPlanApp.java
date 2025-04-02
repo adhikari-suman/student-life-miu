@@ -15,7 +15,6 @@ import java.util.List;
 
 public class EmployeePensionPlanApp {
     public static void main(String[] args) throws Exception {
-        System.out.println("I am main");
         // 1. Load employee data
         List<Employee> employees = loadEmployeeData();
 
