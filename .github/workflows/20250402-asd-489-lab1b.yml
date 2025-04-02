@@ -1,0 +1,27 @@
+name: Maven build for lab1b of ASD489
+
+on:
+  push:
+    branches:
+      - 20250331_ASD_CS489
+    paths:
+      - '20250331_ASD_CS489/_assignments/20250402_assignment_01b/source_code/EmployeePensionPlanApp/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with maven
+        run: |
+          cd 20250331_ASD_CS489/_assignments/20250402_assignment_01b/source_code/EmployeePensionPlanApp
+          mvn clean package
+    
