@@ -77,7 +77,7 @@ public class EmployeePensionPlanApp {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.registerModule(new JavaTimeModule());
         String json = objectMapper.writeValueAsString(qualifyingEmployees);
-        System.out.println("Printing employees qualifying for pension on next quarter as JSON");
+        System.out.println("Printing all the employees qualifying for pension on next quarter as JSON");
         System.out.println(json);
     }
 
