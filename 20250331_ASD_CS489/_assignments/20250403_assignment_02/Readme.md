@@ -1,7 +1,7 @@
 # ADS Web Management System
 
 
-## Functional Requirments for the system
+## 1. Functional Requirements for the system
 
 ### 1. User Management
 
@@ -18,3 +18,13 @@
 ### 3. Bill Management
 
 1. A patient cannot book future appointment if he/she has outstanding bill.
+
+
+---
+
+## 2. UML Diagram for the ADS Web Management System
+
+<figure>
+    <img src="./diagrams/surgery-management-system.png" alt="UML Diagram for ADS Web Management System" />
+    <figcaption>UML Diagram for ADS Web Management System</figcaption>
+</figure>
