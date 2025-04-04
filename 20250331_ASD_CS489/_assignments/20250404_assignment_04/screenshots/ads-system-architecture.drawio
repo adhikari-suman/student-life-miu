@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.2.6">
   <diagram name="Page-1" id="LAhv8vriaJ1nKEPxHH_n">
-    <mxGraphModel dx="1020" dy="655" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+    <mxGraphModel dx="1360" dy="873" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -148,6 +148,12 @@
             <mxPoint x="430" y="198.5" as="sourcePoint" />
             <mxPoint x="340" y="196.5" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="lQRNohtO2SwEvqTAGGvF-3" value="Frontend Web Application" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="tbAudo4sEafu-b6Cth5T-43">
+          <mxGeometry x="230" y="286.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lQRNohtO2SwEvqTAGGvF-4" value="Java Spring Backend Application" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="tbAudo4sEafu-b6Cth5T-43">
+          <mxGeometry x="610" y="296.5" width="140" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
