@@ -1,26 +1,30 @@
 
 # Solutions
 
-## 1. Dummy data
+## 1. ER Diagram
+
+<img src="./screenshots/00-er-diagram.jpg" />
+
+## 2. Dummy data
 
 <img src="./screenshots/01-dummy-data.png" />
 
-## 2. Queries
+## 3. Queries
 
-### 2.1 Query 1
+### 3.1 Query 1
 <img src="./screenshots/02-query-1.png" />
 
-### 2.2 Query 2
+### 3.2 Query 2
 <img src="./screenshots/03-query-2.png" />
 
-### 2.3 Query 3
+### 3.3 Query 3
 <img src="./screenshots/04-query-3.png" />
 
-### 2.4 Query 4
+### 3.4 Query 4
 <img src="./screenshots/05-query-4.png" />
 
 
-## 3. SQL
+## 4. SQL
 
 ```sql
 -- Create Database
