@@ -8,6 +8,7 @@ import com.bright.libms.model.Address;
 import com.bright.libms.model.Publisher;
 import com.bright.libms.repository.PublisherRepository;
 import com.bright.libms.service.PublisherService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public Optional<PublisherResponseDto> findPublisherByName(String name) {
-        Optional<Publisher> optionalPublisher = publisherRepository.findByName(name);
+        Optional<Publisher> optionalPublisher = publisherRepository.findByNameIgnoreCase(name);
         if (optionalPublisher.isPresent()) {
             return Optional.ofNullable(publisherMapper.publisherToPublisherResponseDto(optionalPublisher.get()));
         }
@@ -48,8 +49,36 @@ public class PublisherServiceImpl implements PublisherService {
         return publisherResponseDtoList;
     }
 
+    @Transactional
     @Override
     public Optional<PublisherResponseDto> updatePublisher(String name, PublisherRequestDto publisherRequestDto) {
-        return Optional.empty();
+        Optional<Publisher> optionalPublisher = publisherRepository.findByNameIgnoreCase(name);
+
+        if (optionalPublisher.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Publisher foundPublisher = optionalPublisher.get();
+        Publisher mappedPublisher = publisherMapper.publisherRequestDtoToPublisher(publisherRequestDto);
+
+        mappedPublisher.setId(foundPublisher.getId());
+
+        if(mappedPublisher.getAddress() != null){
+            mappedPublisher.getAddress().setId(foundPublisher.getAddress().getId());
+        }
+        Publisher updatedPublisher = publisherRepository.save(mappedPublisher);
+
+        return Optional.ofNullable(publisherMapper.publisherToPublisherResponseDto(updatedPublisher));
+
+    }
+
+    @Transactional
+    @Override
+    public void deletePublisherByName(String name) {
+        Optional<PublisherResponseDto>  optionalPublisherResponseDto = findPublisherByName(name);
+
+        if (optionalPublisherResponseDto.isPresent()) {
+            publisherRepository.deleteByName(name);
+        }
     }
 }
