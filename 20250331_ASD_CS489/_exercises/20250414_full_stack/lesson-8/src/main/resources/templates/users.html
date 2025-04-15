@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+
+<p th:if="${success}" th:text="${success}" style="color: green"/>
+<p th:if="${error}" th:text="${suerrorccess}" style="color: red"/>
+
+<a th:href="@{/api/v1/users/sign-up}">Add new user</a>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    <tr th:each="userResponseDTO, iteration: ${userResponseDTOs}">
+        <td th:text="${iteration.count}"/>
+        <td th:text="${userResponseDTO.username}"/>
+        <td>
+            <a th:href="@{/api/v1/users/edit-user/{username}(username=${userResponseDTO.username})}">
+                <img th:src="@{/images/edit.png}" th:width="24px" th:height="24px"/>
+            </a>
+        </td>
+
+        <td>
+            <img th:src="@{/images/delete.png}" th:width="24px" th:height="24px"/>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
