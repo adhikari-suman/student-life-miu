@@ -2,18 +2,25 @@ package edu.miu.cs489.adswebapp.configuration;
 
 import edu.miu.cs489.adswebapp.model.*;
 import edu.miu.cs489.adswebapp.respository.*;
+import edu.miu.cs489.adswebapp.service.AppointmentService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigDecimal;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 @Configuration
+@RequiredArgsConstructor
 @Transactional
 public class DataInitializer {
+
+
+    private final AppointmentService appointmentService;
 
     @Bean
     CommandLineRunner initData(
@@ -25,18 +32,25 @@ public class DataInitializer {
             BillRepository billRepository // Inject BillRepository to save Bill
                               ) {
         return args -> {
-
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy HH:mm");
 
             // Addresses
-            Address addressS10 = new Address(null, "123 Main St, Springfield");
-            Address addressS13 = new Address(null, "456 Elm St, Springfield");
-            Address addressS15 = new Address(null, "789 Oak St, Springfield");
+            Address address1 =  new Address(null, "123 Main St, Springfield");
+            Address address2 =  new Address(null, "456 Elm St, Springfield");
+            Address address3 =  new Address(null, "789 Oak St, Springfield");
+            Address address4 =  new Address(null, "123 Main St, Springfield");
+            Address address5 =  new Address(null, "456 Elm St, Springfield");
+            Address address6 =  new Address(null, "789 Oak St, Springfield");
+            Address address7 =  new Address(null, "123 Main St, Springfield");
+
+
 
             // Surgeries
-            Surgery s10 = surgeryRepository.save(new Surgery(null, "S10", addressS10, "111-111-1111", null));
-            Surgery s13 = surgeryRepository.save(new Surgery(null, "S13", addressS13, "222-222-2222", null));
-            Surgery s15 = surgeryRepository.save(new Surgery(null, "S15", addressS15, "333-333-3333", null));
+            Surgery s10 = surgeryRepository.save(new Surgery(null, "S10", address1, "111-111-1111", null));
+            Surgery s13 = surgeryRepository.save(new Surgery(null, "S13", address2, "222-222-2222", null));
+            Surgery s15 = surgeryRepository.save(new Surgery(null, "S15", address3, "333-333-3333", null));
+
+
 
             // Dentists
             Dentist tony = new Dentist();
@@ -79,7 +93,7 @@ public class DataInitializer {
             p100.setPhoneNumber("321-456");
             p100.setEmail("gillian@patients.com");
             p100.setDateOfBirth(new Date(90, 1, 1)); // Feb 1, 1990
-            p100.setAddress(addressS15);
+            p100.setAddress(address4);
             patientRepository.save(p100);
 
             Patient p105 = new Patient();
@@ -91,7 +105,7 @@ public class DataInitializer {
             p105.setPhoneNumber("321-457");
             p105.setEmail("jill@patients.com");
             p105.setDateOfBirth(new Date(88, 5, 20)); // Jun 20, 1988
-            p105.setAddress(addressS15);
+            p105.setAddress(address5);
             patientRepository.save(p105);
 
             Patient p108 = new Patient();
@@ -103,7 +117,7 @@ public class DataInitializer {
             p108.setPhoneNumber("321-458");
             p108.setEmail("ian@patients.com");
             p108.setDateOfBirth(new Date(85, 10, 11)); // Nov 11, 1985
-            p108.setAddress(addressS10);
+            p108.setAddress(address6);
             patientRepository.save(p108);
 
             Patient p110 = new Patient();
@@ -115,10 +129,10 @@ public class DataInitializer {
             p110.setPhoneNumber("321-459");
             p110.setEmail("john@patients.com");
             p110.setDateOfBirth(new Date(87, 3, 14)); // Apr 14, 1987
-            p110.setAddress(addressS13);
+            p110.setAddress(address7);
             patientRepository.save(p110);
 
-            // Create Appointments and Bills using no-args constructor
+//            // Create Appointments and Bills using no-args constructor
             Appointment appointment1 = new Appointment();
             appointment1.setPatient(p100);
             appointment1.setDentist(tony);
@@ -127,7 +141,7 @@ public class DataInitializer {
             appointment1.setAppointmentStatus(0);
             Bill bill1 = new Bill();
             bill1.setAppointment(appointment1);
-            bill1.setAmount(100.00);
+            bill1.setAmount(BigDecimal.valueOf(100.00));
             bill1.setBillStatus(0);
             appointment1.setBill(bill1);
 
@@ -139,7 +153,7 @@ public class DataInitializer {
             appointment2.setAppointmentStatus(0);
             Bill bill2 = new Bill();
             bill2.setAppointment(appointment2);
-            bill2.setAmount(150.00);
+            bill2.setAmount(BigDecimal.valueOf(150.00));
             bill2.setBillStatus(0);
             appointment2.setBill(bill2);
 
@@ -151,7 +165,7 @@ public class DataInitializer {
             appointment3.setAppointmentStatus(0);
             Bill bill3 = new Bill();
             bill3.setAppointment(appointment3);
-            bill3.setAmount(200.00);
+            bill3.setAmount(BigDecimal.valueOf(200.00));
             bill3.setBillStatus(0);
             appointment3.setBill(bill3);
 
@@ -163,7 +177,7 @@ public class DataInitializer {
             appointment4.setAppointmentStatus(0);
             Bill bill4 = new Bill();
             bill4.setAppointment(appointment4);
-            bill4.setAmount(250.00);
+            bill4.setAmount(BigDecimal.valueOf(250.00));
             bill4.setBillStatus(0);
             appointment4.setBill(bill4);
 
@@ -175,7 +189,7 @@ public class DataInitializer {
             appointment5.setAppointmentStatus(0);
             Bill bill5 = new Bill();
             bill5.setAppointment(appointment5);
-            bill5.setAmount(300.00);
+            bill5.setAmount(BigDecimal.valueOf(300.00));
             bill5.setBillStatus(0);
             appointment5.setBill(bill5);
 
@@ -187,7 +201,7 @@ public class DataInitializer {
             appointment6.setAppointmentStatus(0);
             Bill bill6 = new Bill();
             bill6.setAppointment(appointment6);
-            bill6.setAmount(350.00);
+            bill6.setAmount(BigDecimal.valueOf(350.00));
             bill6.setBillStatus(0);
             appointment6.setBill(bill6);
 
@@ -198,13 +212,6 @@ public class DataInitializer {
             appointmentRepository.save(appointment4);
             appointmentRepository.save(appointment5);
             appointmentRepository.save(appointment6);
-
-            billRepository.save(bill1);
-            billRepository.save(bill2);
-            billRepository.save(bill3);
-            billRepository.save(bill4);
-            billRepository.save(bill5);
-            billRepository.save(bill6);
         };
     }
 

@@ -26,7 +26,7 @@ public class Appointment {
     @JoinColumn(name = "dentist_id")
     private Dentist dentist;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "surgery_id", nullable = false)
     private Surgery surgery;
 
@@ -38,7 +38,7 @@ public class Appointment {
     @Column(name = "appointment_status", nullable = false)
     private int appointmentStatus;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "bill_id")
     private Bill bill;
 }

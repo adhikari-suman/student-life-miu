@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "bills")
 @Data
@@ -14,14 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Bill {
     @Id
-    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // Same as appointment ID
 
-    @OneToOne(mappedBy = "bill")
+    @OneToOne(mappedBy = "bill", cascade = CascadeType.ALL)
     private Appointment appointment;
 
     @Column(name = "amount", nullable = false)
-    private double amount;
+    private BigDecimal amount;
 
     @Column(name = "bill_status", nullable = false)
     private int billStatus = 0;
