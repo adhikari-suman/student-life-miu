@@ -57,7 +57,7 @@ public class DataInitializer {
             tony.setFirstName("Tony");
             tony.setLastName("Smith");
             tony.setUsername("tsmith");
-            tony.setPasswordHash("pwd");
+            tony.setPassword("pwd");
             tony.setPhoneNumber("123-456");
             tony.setEmail("tony@dental.com");
             tony.setSpecialization("General Dentistry");
@@ -67,7 +67,7 @@ public class DataInitializer {
             helen.setFirstName("Helen");
             helen.setLastName("Pearson");
             helen.setUsername("hpearson");
-            helen.setPasswordHash("pwd");
+            helen.setPassword("pwd");
             helen.setPhoneNumber("123-457");
             helen.setEmail("helen@dental.com");
             helen.setSpecialization("Oral Surgery");
@@ -77,7 +77,7 @@ public class DataInitializer {
             robin.setFirstName("Robin");
             robin.setLastName("Plevin");
             robin.setUsername("rplevin");
-            robin.setPasswordHash("pwd");
+            robin.setPassword("pwd");
             robin.setPhoneNumber("123-458");
             robin.setEmail("robin@dental.com");
             robin.setSpecialization("Orthodontics");
@@ -89,7 +89,7 @@ public class DataInitializer {
             p100.setFirstName("Gillian");
             p100.setLastName("White");
             p100.setUsername("gwhite");
-            p100.setPasswordHash("pwd");
+            p100.setPassword("pwd");
             p100.setPhoneNumber("321-456");
             p100.setEmail("gillian@patients.com");
             p100.setDateOfBirth(new Date(90, 1, 1)); // Feb 1, 1990
@@ -101,7 +101,7 @@ public class DataInitializer {
             p105.setFirstName("Jill");
             p105.setLastName("Bell");
             p105.setUsername("jbell");
-            p105.setPasswordHash("pwd");
+            p105.setPassword("pwd");
             p105.setPhoneNumber("321-457");
             p105.setEmail("jill@patients.com");
             p105.setDateOfBirth(new Date(88, 5, 20)); // Jun 20, 1988
@@ -113,7 +113,7 @@ public class DataInitializer {
             p108.setFirstName("Ian");
             p108.setLastName("MacKay");
             p108.setUsername("imackay");
-            p108.setPasswordHash("pwd");
+            p108.setPassword("pwd");
             p108.setPhoneNumber("321-458");
             p108.setEmail("ian@patients.com");
             p108.setDateOfBirth(new Date(85, 10, 11)); // Nov 11, 1985
@@ -125,7 +125,7 @@ public class DataInitializer {
             p110.setFirstName("John");
             p110.setLastName("Walker");
             p110.setUsername("jwalker");
-            p110.setPasswordHash("pwd");
+            p110.setPassword("pwd");
             p110.setPhoneNumber("321-459");
             p110.setEmail("john@patients.com");
             p110.setDateOfBirth(new Date(87, 3, 14)); // Apr 14, 1987
