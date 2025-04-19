@@ -1,9 +1,8 @@
-package edu.miu.cs489.adswebapp.model;
+package edu.miu.cs489.adswebapp.security.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
