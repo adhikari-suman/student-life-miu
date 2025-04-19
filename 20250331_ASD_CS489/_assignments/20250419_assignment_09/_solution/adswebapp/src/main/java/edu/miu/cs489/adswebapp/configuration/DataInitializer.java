@@ -32,6 +32,11 @@ public class DataInitializer {
             BillRepository billRepository // Inject BillRepository to save Bill
                               ) {
         return args -> {
+            if(addressRepository.size() > 0) {
+                return;
+            }
+
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy HH:mm");
 
             // Addresses
