@@ -1,0 +1,34 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      MYSQL_DATABASE: employeedb
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: verysecret
+      MYSQL_USER: myuser
+      MYSQL_ROOT_HOST: 'localhost'
+    ports:
+      - '3306:3306'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  web:
+    image: expertkid/spring-products-rest-api:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-flex-server-suman-adhikari-us-central.mysql.database.azure.com:3306/products_db?useSSL=true
+      SPRING_DATASOURCE_USERNAME: galaxy_overhole_691
+      SPRING_DATASOURCE_PASSWORD: PfU7JAHUhZQAHzn
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
