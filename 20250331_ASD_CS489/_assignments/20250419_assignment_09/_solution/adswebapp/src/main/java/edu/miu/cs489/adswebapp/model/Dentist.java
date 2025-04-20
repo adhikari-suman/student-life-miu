@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("DENTIST")
 public class Dentist extends User {
     @Column(name = "specialization", nullable = false, length = 100)
     private String specialization;

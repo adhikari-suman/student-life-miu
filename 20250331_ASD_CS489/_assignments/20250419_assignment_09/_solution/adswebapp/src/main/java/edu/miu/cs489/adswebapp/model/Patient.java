@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("PATIENT")
 public class Patient extends User {
     @Column(name = "patient_no", unique = true, nullable = false, length = 10)
     private String patientNo;

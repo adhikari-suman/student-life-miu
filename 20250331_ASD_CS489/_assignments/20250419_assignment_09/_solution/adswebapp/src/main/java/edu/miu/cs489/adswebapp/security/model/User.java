@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "user_type")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
