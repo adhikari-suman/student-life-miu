@@ -43,7 +43,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String populateAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining());
+        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
     }
 
     @Override
