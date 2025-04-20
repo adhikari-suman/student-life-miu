@@ -2,12 +2,14 @@ package edu.miu.cs489.adswebapp.configuration;
 
 import edu.miu.cs489.adswebapp.model.*;
 import edu.miu.cs489.adswebapp.respository.*;
+import edu.miu.cs489.adswebapp.security.model.Role;
 import edu.miu.cs489.adswebapp.service.AppointmentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.sql.SQLOutput;
@@ -29,25 +31,26 @@ public class DataInitializer {
             PatientRepository patientRepository,
             DentistRepository dentistRepository,
             AppointmentRepository appointmentRepository,
-            BillRepository billRepository // Inject BillRepository to save Bill
+            BillRepository billRepository,
+            // Inject BillRepository to save Bill
+            PasswordEncoder passwordEncoder,
+            UserRepository userRepository
                               ) {
         return args -> {
-            if(addressRepository.size() > 0) {
+            if (addressRepository.size() > 0) {
                 return;
             }
-
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy HH:mm");
 
             // Addresses
-            Address address1 =  new Address(null, "123 Main St, Springfield");
-            Address address2 =  new Address(null, "456 Elm St, Springfield");
-            Address address3 =  new Address(null, "789 Oak St, Springfield");
-            Address address4 =  new Address(null, "123 Main St, Springfield");
-            Address address5 =  new Address(null, "456 Elm St, Springfield");
-            Address address6 =  new Address(null, "789 Oak St, Springfield");
-            Address address7 =  new Address(null, "123 Main St, Springfield");
-
+            Address address1 = new Address(null, "123 Main St, Springfield");
+            Address address2 = new Address(null, "456 Elm St, Springfield");
+            Address address3 = new Address(null, "789 Oak St, Springfield");
+            Address address4 = new Address(null, "123 Main St, Springfield");
+            Address address5 = new Address(null, "456 Elm St, Springfield");
+            Address address6 = new Address(null, "789 Oak St, Springfield");
+            Address address7 = new Address(null, "123 Main St, Springfield");
 
 
             // Surgeries
@@ -56,36 +59,38 @@ public class DataInitializer {
             Surgery s15 = surgeryRepository.save(new Surgery(null, "S15", address3, "333-333-3333", null));
 
 
-
             // Dentists
             Dentist tony = new Dentist();
             tony.setFirstName("Tony");
             tony.setLastName("Smith");
             tony.setUsername("tsmith");
-            tony.setPassword("pwd");
+            tony.setPassword(passwordEncoder.encode("pwd"));
             tony.setPhoneNumber("123-456");
             tony.setEmail("tony@dental.com");
             tony.setSpecialization("General Dentistry");
+            tony.setRole(Role.DENTIST);
             dentistRepository.save(tony);
 
             Dentist helen = new Dentist();
             helen.setFirstName("Helen");
             helen.setLastName("Pearson");
             helen.setUsername("hpearson");
-            helen.setPassword("pwd");
+            helen.setPassword(passwordEncoder.encode("pwd"));
             helen.setPhoneNumber("123-457");
             helen.setEmail("helen@dental.com");
             helen.setSpecialization("Oral Surgery");
+            helen.setRole(Role.DENTIST);
             dentistRepository.save(helen);
 
             Dentist robin = new Dentist();
             robin.setFirstName("Robin");
             robin.setLastName("Plevin");
             robin.setUsername("rplevin");
-            robin.setPassword("pwd");
+            robin.setPassword(passwordEncoder.encode("pwd"));
             robin.setPhoneNumber("123-458");
             robin.setEmail("robin@dental.com");
             robin.setSpecialization("Orthodontics");
+            robin.setRole(Role.DENTIST);
             dentistRepository.save(robin);
 
             // Patients
@@ -94,11 +99,12 @@ public class DataInitializer {
             p100.setFirstName("Gillian");
             p100.setLastName("White");
             p100.setUsername("gwhite");
-            p100.setPassword("pwd");
+            p100.setPassword(passwordEncoder.encode("pwd"));
             p100.setPhoneNumber("321-456");
             p100.setEmail("gillian@patients.com");
             p100.setDateOfBirth(new Date(90, 1, 1)); // Feb 1, 1990
             p100.setAddress(address4);
+            p100.setRole(Role.PATIENT);
             patientRepository.save(p100);
 
             Patient p105 = new Patient();
@@ -106,11 +112,12 @@ public class DataInitializer {
             p105.setFirstName("Jill");
             p105.setLastName("Bell");
             p105.setUsername("jbell");
-            p105.setPassword("pwd");
+            p105.setPassword(passwordEncoder.encode("pwd"));
             p105.setPhoneNumber("321-457");
             p105.setEmail("jill@patients.com");
             p105.setDateOfBirth(new Date(88, 5, 20)); // Jun 20, 1988
             p105.setAddress(address5);
+            p105.setRole(Role.PATIENT);
             patientRepository.save(p105);
 
             Patient p108 = new Patient();
@@ -118,11 +125,12 @@ public class DataInitializer {
             p108.setFirstName("Ian");
             p108.setLastName("MacKay");
             p108.setUsername("imackay");
-            p108.setPassword("pwd");
+            p108.setPassword(passwordEncoder.encode("pwd"));
             p108.setPhoneNumber("321-458");
             p108.setEmail("ian@patients.com");
             p108.setDateOfBirth(new Date(85, 10, 11)); // Nov 11, 1985
             p108.setAddress(address6);
+            p108.setRole(Role.PATIENT);
             patientRepository.save(p108);
 
             Patient p110 = new Patient();
@@ -130,11 +138,12 @@ public class DataInitializer {
             p110.setFirstName("John");
             p110.setLastName("Walker");
             p110.setUsername("jwalker");
-            p110.setPassword("pwd");
+            p110.setPassword(passwordEncoder.encode("pwd"));
             p110.setPhoneNumber("321-459");
             p110.setEmail("john@patients.com");
             p110.setDateOfBirth(new Date(87, 3, 14)); // Apr 14, 1987
             p110.setAddress(address7);
+            p110.setRole(Role.PATIENT);
             patientRepository.save(p110);
 
 //            // Create Appointments and Bills using no-args constructor
@@ -217,6 +226,18 @@ public class DataInitializer {
             appointmentRepository.save(appointment4);
             appointmentRepository.save(appointment5);
             appointmentRepository.save(appointment6);
+
+            // Office Admin
+            OfficeManager officeManager = new OfficeManager();
+
+           officeManager.setFirstName("Office");
+           officeManager.setLastName("Admin");
+           officeManager.setUsername("admin");
+           officeManager.setPassword(passwordEncoder.encode("admin"));
+           officeManager.setPhoneNumber("124-321-2459");
+           officeManager.setEmail("john@officeAdmin.com");
+           officeManager.setRole(Role.OFFICE_ADMIN);
+           userRepository.save(officeManager);
         };
     }
 
