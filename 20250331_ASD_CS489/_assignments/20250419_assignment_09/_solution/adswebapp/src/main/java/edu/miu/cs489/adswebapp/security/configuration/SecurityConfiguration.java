@@ -2,9 +2,11 @@ package edu.miu.cs489.adswebapp.security.configuration;
 
 import edu.miu.cs489.adswebapp.respository.UserRepository;
 import edu.miu.cs489.adswebapp.security.filter.JwtFilter;
+import edu.miu.cs489.adswebapp.security.model.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,8 +27,24 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers("/api/v1/auth/*")
+            .authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers("/api/v1/auth/current-user")
+                                                                         .authenticated()
+                                                                         .requestMatchers("/api/v1/auth/*")
                                                                          .permitAll()
+                                                                         .requestMatchers(
+                                                                                 HttpMethod.DELETE,
+                                                                                 "/api/v1/patients/{patientId}"
+                                                                                         )
+                                                                         .hasRole(Role.OFFICE_ADMIN.name())
+                                                                         .requestMatchers(
+                                                                                 "/api/v1/patients/**",
+                                                                                 "/api/v1/addresses/**"
+                                                                                         )
+                                                                         .hasAnyRole(
+                                                                                 Role.PATIENT.name(),
+                                                                                 Role.OFFICE_ADMIN.name(),
+                                                                                 Role.DENTIST.name()
+                                                                                    )
                                                                          .anyRequest()
                                                                          .authenticated())
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
